@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "417188343420",
+    "firebase_url": "https://homedoctor-9aadf.firebaseio.com",
+    "project_id": "homedoctor-9aadf",
+    "storage_bucket": "homedoctor-9aadf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:417188343420:android:c2cf48152bb8294e9363f9",
+        "android_client_info": {
+          "package_name": "com.phirered2015.homedoctor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "417188343420-6q8mmkfuga0jqh9rfifek31m8oaqgukc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.phirered2015.homedoctor",
+            "certificate_hash": "248216e33f5caf375f45ccde981f7d5f455788a1"
+          }
+        },
+        {
+          "client_id": "417188343420-4a6eu252hn503cnvp7rnl41p6hb2mgvi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOqGJ2qA_IKfKmsIkTSMBR7vEePGOvnX0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "417188343420-4a6eu252hn503cnvp7rnl41p6hb2mgvi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
