@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">HomeDoctor</string>
+    <string name="id">ID</string>
+    <string name="pwd">Password</string>
+
+
+    <string name="sign_up_kr">회원가입</string>
+    <string name="login_kr">로그인</string>
+    <string name="phone_kr">전화번호</string>
+    <string name="name_kr">이름</string>
+    <string name="pwd_kr">비밀번호</string>
+    <string name="post_num_kr">우편번호</string>
+    <string name="address_kr">주소</string>
+    <string name="detail_address_kr">상세주소</string>
+    <string name="search_kr">검색</string>
+
 </resources>
