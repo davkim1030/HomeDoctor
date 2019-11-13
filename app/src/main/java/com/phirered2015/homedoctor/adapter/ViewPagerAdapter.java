@@ -1,6 +1,8 @@
 package com.phirered2015.homedoctor.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.phirered2015.homedoctor.R;
+import com.phirered2015.homedoctor.activity.SignUpActivity;
 import com.phirered2015.homedoctor.item.TutorialItem;
 
 import java.util.ArrayList;
@@ -36,7 +39,7 @@ public class ViewPagerAdapter extends PagerAdapter {
     }
 
     @Override
-    public Object instantiateItem(ViewGroup container, int position){
+    public Object instantiateItem(final ViewGroup container, final int position){
         View view = null;
 
         if(mContext != null){
@@ -49,6 +52,16 @@ public class ViewPagerAdapter extends PagerAdapter {
 
             imageView.setImageDrawable(itemList.get(position).getImgDesc());
             textView.setText(itemList.get(position).getTxtDesc());
+
+            if(itemList.get(position).getActivity() != null){
+                textView.setTextColor(view.getResources().getColor(R.color.colorAccent));
+                textView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mContext.startActivity(new Intent(mContext, itemList.get(position).getActivity()));
+                    }
+                });
+            }
         }
 
         container.addView(view);

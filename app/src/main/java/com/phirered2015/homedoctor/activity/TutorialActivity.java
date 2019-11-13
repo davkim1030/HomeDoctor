@@ -1,5 +1,6 @@
 package com.phirered2015.homedoctor.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -71,7 +72,7 @@ public class TutorialActivity extends AppCompatActivity {
         tutorialItems.add(new TutorialItem(getDrawable(R.drawable.ic_launcher_background), "3"));
         tutorialItems.add(new TutorialItem(getDrawable(R.drawable.ic_launcher_background), "4"));
         tutorialItems.add(new TutorialItem(getDrawable(R.drawable.ic_launcher_background), "5"));
-        tutorialItems.add(new TutorialItem(getDrawable(R.drawable.ic_launcher_background), "6"));
+        tutorialItems.add(new TutorialItem(getDrawable(R.drawable.ic_launcher_background), "시작하기->", SignUpActivity.class));
     }
 
     // viewpager 초기화
