@@ -13,5 +13,17 @@
     <string name="address_kr">주소</string>
     <string name="detail_address_kr">상세주소</string>
     <string name="search_kr">검색</string>
+    <string name="product_name_kr">상품명</string>
+    <string name="shopping_cart_kr">장바구니</string>
+    <string name="purchase_kr">구매하기</string>
+    <string name="delete_kr">삭제</string>
+    <string name="select_all_kr">전체선택</string>
+    <string name="total_price_kr">총 금액 : </string>
+    <string name="cancel_kr">취소</string>
+    <string name="save_kr">저장</string>
+    <string name="item_list_kr">상품 리스트</string>
+    <string name="pay_kr">결재</string>
+    <string name="pay_success_kr">결재 완료!</string>
+    <string name="goto_main_kr">메인으로</string>
 
 </resources>
