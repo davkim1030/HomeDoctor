@@ -13,5 +13,8 @@
     <string name="address_kr">주소</string>
     <string name="detail_address_kr">상세주소</string>
     <string name="search_kr">검색</string>
+    <string name="product_name_kr">상품명</string>
+    <string name="shopping_cart_kr">장바구니</string>
+    <string name="purchase_kr">구매하기</string>
 
 </resources>
