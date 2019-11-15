@@ -21,14 +21,17 @@
             android:id="@+id/idInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="phonenum"
+            android:hint="전화번호"
+            android:imeOptions="actionNext"
+            android:inputType="phone"
             />
 
         <EditText
             android:id="@+id/pwdInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="password"
+            android:hint="비밀번호"
+            android:inputType="textPassword"
             />
 
     </LinearLayout>
@@ -45,6 +48,7 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:text="회원가입"
+            android:onClick="onClick"
             />
 
         <Button
@@ -54,6 +58,7 @@
             android:layout_weight="2"
             android:text="로그인"
             android:backgroundTint="#2196F3"
+            android:onClick="onClick"
             />
 
     </LinearLayout>
@@ -70,6 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="ID 저장"
+            android:onClick="onCheckboxClicked"
             />
 
         <CheckBox
@@ -78,6 +84,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="자동 로그인"
+            android:onClick="onCheckboxClicked"
             />
 
     </LinearLayout>

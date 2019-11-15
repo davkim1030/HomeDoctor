@@ -1,18 +1,63 @@
 package com.phirered2015.homedoctor.activity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.phirered2015.homedoctor.R;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity {
-
+    Button login, signup;
+    private EditText id, pwd;
+    CheckBox idsave, autologin;
     @Override
     protected void onCreate(Bundle savedInstanceStated){
+
         super.onCreate(savedInstanceStated);
         setContentView(R.layout.activity_login);
+        id = (EditText) findViewById(R.id.idInput);
+        pwd = (EditText) findViewById(R.id.pwdInput);
+        login = (Button) findViewById(R.id.loginBtn);
+        signup = (Button) findViewById(R.id.registerBtn);
+        idsave = (CheckBox) findViewById(R.id.checkIdsave);
+        autologin = (CheckBox) findViewById(R.id.checkAutologin);
 
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(LoginActivity.this, "로그인작동", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(LoginActivity.this, "회원가입작동", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
+    public void onCheckboxClicked(View view) {
+        boolean checked = ((CheckBox) view).isChecked();
+
+        switch(view.getId()){
+            case R.id.checkIdsave:
+                if (checked)
+                    Toast.makeText(getApplicationContext(), "ID 저장", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(getApplicationContext(), "ID 저장 취소", Toast.LENGTH_SHORT).show();
+            case R.id.checkAutologin:
+                if(checked)
+                    Toast.makeText(getApplicationContext(), "자동 로그인", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(getApplicationContext(), "자동 로그인 취소", Toast.LENGTH_SHORT).show();
+        }
+    }
 }
+
+
