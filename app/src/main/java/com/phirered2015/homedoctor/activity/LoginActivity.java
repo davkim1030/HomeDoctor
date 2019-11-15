@@ -1,5 +1,6 @@
 package com.phirered2015.homedoctor.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,21 +28,25 @@ public class LoginActivity extends AppCompatActivity {
         idsave = (CheckBox) findViewById(R.id.checkIdsave);
         autologin = (CheckBox) findViewById(R.id.checkAutologin);
 
+        //로그인 버튼 리스너
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(LoginActivity.this, "로그인작동", Toast.LENGTH_SHORT).show();
             }
         });
-
+        //회원가입 버튼 리스너
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(LoginActivity.this, "회원가입작동", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
     }
+    //체크박스 할당
     public void onCheckboxClicked(View view) {
         boolean checked = ((CheckBox) view).isChecked();
 
