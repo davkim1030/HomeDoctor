@@ -1,5 +1,6 @@
 package com.phirered2015.homedoctor.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,14 +14,18 @@ import com.phirered2015.homedoctor.R;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity {
+    Context mContext;
+
     Button login, signup;
     private EditText id, pwd;
     CheckBox idsave, autologin;
     @Override
     protected void onCreate(Bundle savedInstanceStated){
-
         super.onCreate(savedInstanceStated);
         setContentView(R.layout.activity_login);
+
+        mContext = this;
+
         id = (EditText) findViewById(R.id.idInput);
         pwd = (EditText) findViewById(R.id.pwdInput);
         login = (Button) findViewById(R.id.loginBtn);
@@ -32,7 +37,10 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(LoginActivity.this, "로그인작동", Toast.LENGTH_SHORT).show();
+                // TODO: 로그인 동작 구현 필요
+                Toast.makeText(LoginActivity.this, "로그인 작동 구현 필요", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(mContext, MainActivity.class));
+                finish();
             }
         });
         //회원가입 버튼 리스너
@@ -41,7 +49,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
 
@@ -52,11 +59,13 @@ public class LoginActivity extends AppCompatActivity {
 
         switch(view.getId()){
             case R.id.checkIdsave:
+                // TODO: ID 저장 기능 구현 필요
                 if (checked)
                     Toast.makeText(getApplicationContext(), "ID 저장", Toast.LENGTH_SHORT).show();
                 else
                     Toast.makeText(getApplicationContext(), "ID 저장 취소", Toast.LENGTH_SHORT).show();
             case R.id.checkAutologin:
+                // TODO: 자동 로그인 기능 구현 필요
                 if(checked)
                     Toast.makeText(getApplicationContext(), "자동 로그인", Toast.LENGTH_SHORT).show();
                 else

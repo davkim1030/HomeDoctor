@@ -21,7 +21,7 @@
             android:id="@+id/idInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="전화번호"
+            android:hint="@string/phone_kr"
             android:imeOptions="actionNext"
             android:inputType="phone"
             />
@@ -30,7 +30,7 @@
             android:id="@+id/pwdInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="비밀번호"
+            android:hint="@string/pwd_kr"
             android:inputType="textPassword"
             />
 
@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:text="회원가입"
+            android:text="@string/sign_up_kr"
             android:onClick="onClick"
             />
 
@@ -56,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="로그인"
+            android:text="@string/login_kr"
             android:backgroundTint="#2196F3"
             android:onClick="onClick"
             />
@@ -74,7 +74,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="ID 저장"
+            android:text="@string/save_id_kr"
             android:onClick="onCheckboxClicked"
             />
 
@@ -83,7 +83,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="자동 로그인"
+            android:text="@string/keep_login_kr"
             android:onClick="onCheckboxClicked"
             />
 

@@ -3,6 +3,14 @@
     <string name="id">ID</string>
     <string name="pwd">Password</string>
 
+    <string name="save_id_kr">ID 저장</string>
+    <string name="keep_login_kr">자동 로그인</string>
+    <string name="deliver_state_kr">배송 상태</string>
+    <string name="basket_kr">장바구니</string>
+    <string name="my_page_kr">마이 페이지</string>
+    <string name="pay_info_kr">결제 정보</string>
+    <string name="pay_result_kr">결제 결과</string>
+
 
     <string name="sign_up_kr">회원가입</string>
     <string name="login_kr">로그인</string>

@@ -206,8 +206,15 @@
         android:layout_gravity="bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="@dimen/txt_size_l"
         android:text="@string/sign_up_kr"
         android:background="@color/colorPrimary"
         android:textColor="@color/white"/>
+    <WebView
+        android:id="@+id/webview_post"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"/>
 
 </FrameLayout>

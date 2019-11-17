@@ -3,6 +3,7 @@
     package="com.phirered2015.homedoctor">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -11,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MyPageActivity">
+        <activity android:name=".activity.TestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,6 +23,15 @@
         <activity android:name=".activity.SignUpActivity" android:label="@string/sign_up_kr"/>
         <activity android:name=".activity.TutorialActivity"/>
         <activity android:name=".activity.LoginActivity"/>
+        <activity android:name=".activity.DeliverStateActivity" android:label="@string/sign_up_kr"/>
+        <activity android:name=".activity.SplashActivity"/>
+        <activity android:name=".activity.DetailActivity"/>
+        <activity android:name=".activity.BasketActivity" android:label="@string/basket_kr"/>
+        <activity android:name=".activity.MyPageActivity" android:label="@string/my_page_kr"/>
+        <activity android:name=".activity.PayInfoActivity" android:label="@string/pay_info_kr"/>
+        <activity android:name=".activity.PaySuccessActivity" android:label="@string/pay_success_kr"/>
+        <activity android:name=".activity.PayActivity"/>
+
     </application>
 
 </manifest>
