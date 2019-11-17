@@ -3,13 +3,39 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="30dp">
+    android:paddingTop="10dp">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
             android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/txt_size_l"
+            android:paddingEnd="@dimen/txt_size_l"
+            android:weightSum="10">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="@string/email_kr"
+                android:textColor="@color/d_gray"
+                android:textSize="@dimen/txt_size_m"/>
+
+            <EditText
+                android:id="@+id/edit_mail"
+                android:layout_width="0dp"
+                android:layout_weight="7"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:singleLine="true"
+                android:imeOptions="actionNext"
+                android:textSize="@dimen/txt_size_m"/>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/txt_size_l"
@@ -138,7 +164,6 @@
                     android:layout_height="wrap_content"
                     android:singleLine="true"
                     android:imeOptions="actionNext"
-                    android:editable="false"
                     android:textSize="@dimen/txt_size_m"/>
 
                 <Button
@@ -146,6 +171,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/search_kr"
+                    android:visibility="gone"
                     android:background="@color/d_gray"
                     android:textColor="@color/white"/>
             </LinearLayout>
@@ -171,7 +197,6 @@
                 android:layout_weight="7"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:editable="false"
                 android:imeOptions="actionNext"
                 android:textSize="@dimen/txt_size_m"/>
         </LinearLayout>

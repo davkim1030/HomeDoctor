@@ -1,14 +1,12 @@
 package com.phirered2015.homedoctor.activity;
 
+import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.webkit.JavascriptInterface;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
@@ -17,18 +15,30 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.phirered2015.homedoctor.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SignUpActivity extends AppCompatActivity {
 
+    final String TAG = "debuging";
+    private FirebaseAuth mAuth;
     Context mContext;
     Spinner spinnerPhone1;
-    EditText editPhone2, editPhone3, editPwd, editName, editPost, editAddress, editDetailAddress;
+    EditText editMail, editPhone2, editPhone3, editPwd, editName, editPost, editAddress, editDetailAddress;
     Button btnSignUp, btnSearchPost;
     ArrayAdapter arrayAdapter;
 
@@ -40,8 +50,10 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+        mAuth = FirebaseAuth.getInstance();
         mContext = this;
 
+        editMail = findViewById(R.id.edit_mail);
         spinnerPhone1 = findViewById(R.id.spinner_phone_1);
         editPhone2 = findViewById(R.id.edit_phone_2);
         editPhone3 = findViewById(R.id.edit_phone_3);
@@ -71,7 +83,33 @@ public class SignUpActivity extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: firebase 연동하여 로그인 구현
+                if(isValid()){
+                    final String email = editMail.getText().toString();
+                    mAuth.createUserWithEmailAndPassword(email, editPwd.getText().toString())
+                            .addOnCompleteListener((Activity) mContext, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        // Sign in success, update UI with the signed-in user's information
+                                        Log.d(TAG, "createUserWithEmail:success");
+                                        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("user");
+                                        // 데이터베이스 스키마에 "."이 못 들어가므로 .을 !로 대체
+                                        mDatabase.child(email.replace(".","!"));
+                                        mDatabase = mDatabase.child(email.replace(".","!"));
+                                        mDatabase.child("name").setValue(editName.getText().toString());
+                                        mDatabase.child("post_num").setValue(editPost.getText().toString());
+                                        mDatabase.child("address").setValue(editAddress.getText().toString());
+                                        mDatabase.child("detail_address").setValue(editDetailAddress.getText().toString());
+                                    } else {
+                                        // If sign in fails, display a message to the user.
+                                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                        Toast.makeText(mContext, "Authentication failed.",
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                }
+
                 finish();
             }
         });
@@ -121,5 +159,17 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
 
-
+    // 텍스트 필드 값들이 유효한지 확인하는 메소드
+    boolean isValid(){
+        if(!editMail.getText().toString().isEmpty() &&
+           !editPwd.getText().toString().isEmpty() &&
+           !editName.getText().toString().isEmpty() &&
+           !editPost.getText().toString().isEmpty() &&
+           !editAddress.getText().toString().isEmpty() &&
+           !editDetailAddress.getText().toString().isEmpty()){
+            return editMail.getText().toString().contains("@") &&
+                    editMail.getText().toString().contains(".");
+        } else
+            return false;
+    }
 }

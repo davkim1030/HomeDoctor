@@ -3,6 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="@dimen/txt_size_l"
     android:layout_gravity="center">
     <!--Login logo image-->
     <ImageView
@@ -23,7 +24,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/phone_kr"
             android:imeOptions="actionNext"
-            android:inputType="phone"
+            android:inputType="textEmailAddress"
             />
 
         <EditText
@@ -57,7 +58,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="@string/login_kr"
-            android:backgroundTint="#2196F3"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/colorPrimary"
             android:onClick="onClick"
             />
 

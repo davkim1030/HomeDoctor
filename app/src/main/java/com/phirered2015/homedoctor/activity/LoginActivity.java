@@ -1,46 +1,77 @@
 package com.phirered2015.homedoctor.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.phirered2015.homedoctor.R;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity {
     Context mContext;
-
+    private FirebaseAuth mAuth;
+    final String TAG = "DEBUGING";
     Button login, signup;
     private EditText id, pwd;
-    CheckBox idsave, autologin;
+    CheckBox idSave, autoLogin;
     @Override
     protected void onCreate(Bundle savedInstanceStated){
         super.onCreate(savedInstanceStated);
         setContentView(R.layout.activity_login);
 
+        mAuth = FirebaseAuth.getInstance();
         mContext = this;
 
         id = (EditText) findViewById(R.id.idInput);
         pwd = (EditText) findViewById(R.id.pwdInput);
         login = (Button) findViewById(R.id.loginBtn);
         signup = (Button) findViewById(R.id.registerBtn);
-        idsave = (CheckBox) findViewById(R.id.checkIdsave);
-        autologin = (CheckBox) findViewById(R.id.checkAutologin);
+        idSave = (CheckBox) findViewById(R.id.checkIdsave);
+        autoLogin = (CheckBox) findViewById(R.id.checkAutologin);
 
         //로그인 버튼 리스너
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: 로그인 동작 구현 필요
-                Toast.makeText(LoginActivity.this, "로그인 작동 구현 필요", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(mContext, MainActivity.class));
-                finish();
+                // 값이 다 있고 로그인 정보가 맞으면 로그인 정보를 가지고 MainActivity로 인텐트
+                if (!id.getText().toString().isEmpty() && !pwd.getText().toString().isEmpty())
+                    mAuth.signInWithEmailAndPassword(id.getText().toString(), pwd.getText().toString())
+                            .addOnCompleteListener((Activity) mContext, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        // Sign in success, update UI with the signed-in user's information
+                                        Log.d(TAG, "signInWithEmail:success");
+                                        FirebaseUser user = mAuth.getCurrentUser();
+                                        Intent loginIntent = new Intent(mContext, MainActivity.class);
+                                        loginIntent.putExtra("firebaseUser", user);
+                                        startActivity(loginIntent);
+                                        finish();
+                                    } else {
+                                        // If sign in fails, display a message to the user.
+                                        Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                        Toast.makeText(mContext, "잘못된 아이디나 비밀번호입니다",
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+
+                                }
+                            });
+                else
+                    Toast.makeText(mContext, "ID와 비밀번호를 모두 입력해주세요", Toast.LENGTH_SHORT).show();
             }
         });
         //회원가입 버튼 리스너

@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "417188343420-i00lj98bm03n9pqhgge07cuamjojusod.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.phirered2015.homedoctor",
+            "certificate_hash": "f86e5e79d2efc7860af1982c3f79598808f86b96"
+          }
+        },
+        {
           "client_id": "417188343420-6q8mmkfuga0jqh9rfifek31m8oaqgukc.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
