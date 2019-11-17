@@ -3,6 +3,21 @@
     <string name="id">ID</string>
     <string name="pwd">Password</string>
 
+
+    <string name="kakao_rest_api_key">f9e30d24ca1d9a3fbfe8acdbe512bebc</string>
+    <string name="kakao_admin_key">663e19f711f4c0f42636026640dd0581</string>
+    <string name="kakao_pay_cid">TC0ONETIME</string>
+    <string name="kakao_pay_partner_order_id">partner_order_id</string>
+    <string name="kakao_pay_partner_user_id">partner_user_id</string>
+    <string name="kakao_pay_base_url">https://kapi.kakao.com/v1/payment/</string>
+    <string name="kakao_pay_approval_url">success</string>
+    <string name="kakao_pay_ready_url">ready</string>
+    <string name="kakao_pay_cancel_url">cancel</string>
+    <string name="kakao_pay_order_url">order</string>
+    <string name="kakao_pay_fail_url">fail</string>
+
+
+
     <string name="save_id_kr">ID 저장</string>
     <string name="keep_login_kr">자동 로그인</string>
     <string name="deliver_state_kr">배송 상태</string>
