@@ -109,4 +109,30 @@
         public void onView(abc, deg) {
         }
 
+## 데이터베이스 구조
+```
+product
+ - product_id(001 ~)
+   - desc_images
+     - n: 설명 이미지에 대한 URL
+     - ...
+   - description: 상품에 대한 설명
+   - name: 상품명
+   - price: 상품 가격
+   - thumbnail: 썸네일 이미지 URL
+user
+  - userid@domain!com   // .는 db 스키마에 못 들어가므로 !로 대체
+    - address: 주소
+    - detail_address: 상세 주소
+    - name: 유저 이름
+    - post_num: 우편 번호
+    - basket
+      - product_id: quantity
+      ...
+    - purchased
+      - tid
+        - state: 배송 상태 정수 코드로
+        - product_id: quantity
+        ...
+
 # 추가중....
