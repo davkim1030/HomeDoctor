@@ -23,7 +23,7 @@
         <activity android:name=".activity.SignUpActivity" android:label="@string/sign_up_kr"/>
         <activity android:name=".activity.TutorialActivity"/>
         <activity android:name=".activity.LoginActivity"/>
-        <activity android:name=".activity.DeliverStateActivity" android:label="@string/sign_up_kr"/>
+        <activity android:name=".activity.DeliverStateActivity" android:label="@string/deliver_state_kr"/>
         <activity android:name=".activity.SplashActivity"/>
         <activity android:name=".activity.DetailActivity"/>
         <activity android:name=".activity.BasketActivity" android:label="@string/basket_kr"/>
