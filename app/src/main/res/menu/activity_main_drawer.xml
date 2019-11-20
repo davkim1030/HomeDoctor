@@ -5,25 +5,25 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:title="first item"
+            android:title="마이 페이지"
             />
         <item
-            android:title="second item"
+            android:title="장바구니"
             />
         <item
-            android:title="third item"
+            android:title="배송조회"
             />
         <item
-            android:title="forth item"
+            android:title="예약확인/취소"
             />
     </group>
-    <item android:title="Test layer">
+    <item android:title="상담예약">
         <menu>
             <item
-                android:title="item"
+                android:title="000-0000-0000"
                 />
             <item
-                android:title="item"
+                android:title="상담 예약 가능 시간: 00:00 ~ 11:11"
                 />
         </menu>
     </item>
