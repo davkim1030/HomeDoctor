@@ -1,23 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
     android:id="@+id/drawer_navigation"
-    app:startDestination="@+id/nav_basket">
+    app:startDestination="@+id/nav_mypage">
     <fragment
         android:id="@+id/nav_mypage"
         android:label="마이페이지"
+        tool:layout="@layout/fragment_mypage"
         />
     <fragment
         android:id="@+id/nav_basket"
         android:label="@string/shopping_cart_kr"
+        tool:layout="@layout/fragment_basket"
         />
     <fragment
         android:id="@+id/nav_delivery"
         android:label="배송조회"
+        tool:layout="@layout/fragment_delivery"
         />
     <fragment
         android:id="@+id/nav_booking"
         android:label="에약확인/취소"
+        tool:layout="@layout/fragment_booking"
+        />
+    <fragment
+        android:id="@+id/nav_calling"
+        android:label="전화 연결"
+        tool:layout="@layout/fragment_calling"
         />
 
 </navigation>

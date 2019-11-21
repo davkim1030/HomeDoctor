@@ -13,4 +13,5 @@
        android:name="androidx.navigation.fragment.NavHostFragment"
        app:defaultNavHost="true"
        app:navGraph="@navigation/drawer_navigation"/>
+
 </FrameLayout>
