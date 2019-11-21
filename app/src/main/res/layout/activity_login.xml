@@ -22,7 +22,7 @@
             android:id="@+id/idInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/phone_kr"
+            android:hint="@string/email_kr"
             android:imeOptions="actionNext"
             android:inputType="textEmailAddress"
             />

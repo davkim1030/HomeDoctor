@@ -3,6 +3,7 @@ package com.phirered2015.homedoctor.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -87,20 +88,49 @@ public class LoginActivity extends AppCompatActivity {
     //체크박스 할당
     public void onCheckboxClicked(View view) {
         boolean checked = ((CheckBox) view).isChecked();
+        SharedPreferences pref = getSharedPreferences("idpref", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        String idstr = id.getText().toString();
+        String pwdstr = pwd.getText().toString();
+        String loginid = pref.getString("id", null);
+        String loginpwd = pref.getString("pwd", null);
+
 
         switch(view.getId()){
             case R.id.checkIdsave:
-                // TODO: ID 저장 기능 구현 필요
-                if (checked)
-                    Toast.makeText(getApplicationContext(), "ID 저장", Toast.LENGTH_SHORT).show();
-                else
-                    Toast.makeText(getApplicationContext(), "ID 저장 취소", Toast.LENGTH_SHORT).show();
+                // ID 저장 기능
+                if (checked) {
+                    if(idstr != null) {
+                        editor.putString("id", idstr);
+                        editor.commit();
+                    }
+                    else
+                        return;
+                }
+                else {
+                    editor.remove("id");
+                    editor.commit();
+                }
             case R.id.checkAutologin:
-                // TODO: 자동 로그인 기능 구현 필요
-                if(checked)
-                    Toast.makeText(getApplicationContext(), "자동 로그인", Toast.LENGTH_SHORT).show();
-                else
-                    Toast.makeText(getApplicationContext(), "자동 로그인 취소", Toast.LENGTH_SHORT).show();
+                // 자동 로그인 기능
+                if(checked){
+                    editor.putString("id", idstr);
+                    editor.putString("pwd", pwdstr);
+                    editor.commit();
+                   if(loginid != null && loginpwd != null){
+                       if(loginid.equals(id.getText().toString()) && loginpwd.equals(pwd.getText().toString())){
+                            Intent loginintent = new Intent(mContext, MainActivity.class);
+                            startActivity(loginintent);
+                            finish();
+                       }
+                   }
+                }
+
+                else {
+                    editor.remove("id");
+                    editor.remove("pwd");
+                    editor.commit();
+                }
         }
     }
 }
