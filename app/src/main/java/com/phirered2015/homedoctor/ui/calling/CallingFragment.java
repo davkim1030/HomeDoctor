@@ -1,4 +1,4 @@
-package com.phirered2015.homedoctor.ui.mypage;
+package com.phirered2015.homedoctor.ui.calling;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,16 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.phirered2015.homedoctor.R;
 
-public class MypageFragment extends Fragment {
-   private MypageViewModel mypageViewModel;
+
+public class CallingFragment extends Fragment {
+    private CallingViewModel callingViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        mypageViewModel =
-                ViewModelProviders.of(this).get(MypageViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_mypage, container, false);
-        final TextView textView = root.findViewById(R.id.text_mypage);
-        mypageViewModel.getText().observe(this, new Observer<String>() {
+        callingViewModel =
+                ViewModelProviders.of(this).get(CallingViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_calling, container, false);
+        final TextView textView = root.findViewById(R.id.text_calling);
+        callingViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

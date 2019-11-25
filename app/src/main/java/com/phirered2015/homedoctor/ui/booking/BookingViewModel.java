@@ -1,15 +1,15 @@
-package com.phirered2015.homedoctor.ui.mypage;
+package com.phirered2015.homedoctor.ui.booking;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class MypageViewModel extends ViewModel {
+public class BookingViewModel extends ViewModel {
     private MutableLiveData<String> mText;
 
-    public MypageViewModel() {
+    public BookingViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("Mypage page");
+        mText.setValue("Booking page");
     }
 
     public LiveData<String> getText() { return mText; }
