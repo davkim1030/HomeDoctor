@@ -112,27 +112,35 @@
 ## 데이터베이스 구조
 ```
 product
- - product_id(001 ~)
-   - desc_images
-     - n: 설명 이미지에 대한 URL
-     - ...
-   - description: 상품에 대한 설명
-   - name: 상품명
-   - price: 상품 가격
-   - thumbnail: 썸네일 이미지 URL
+- product_id(001 ~)
+  - desc_images
+    - n: 설명 이미지에 대한 URL
+    ...
+	- description: 상품에 대한 설명
+  - name: 상품명
+  - price: 상품 가격
+  - thumbnail: 썸네일 이미지 URL
+...
 user
-  - userid@domain!com   // .는 db 스키마에 못 들어가므로 !로 대체
-    - address: 주소
-    - detail_address: 상세 주소
-    - name: 유저 이름
-    - post_num: 우편 번호
-    - basket
-      - product_id: quantity
+- uid                // authentication의 uid 값 ex)hCCBV48ChFTR5AQOZ29QhImL4F12
+  - address: 주소
+  - detail_address: 상세 주소
+  - name: 유저 이름
+  - post_num: 우편 번호
+  - basket
+    - product_id: quantity
+    ...
+  - purchased
+    - tid
+      - status: 배송 상태 // 결제완료, 배송중, 배송완료
+      - product_id: 상품 번호(001 ~ 060)
+			- quantity: 상품 수량(1~ )
       ...
-    - purchased
-      - tid
-        - state: 배송 상태 정수 코드로
-        - product_id: quantity
-        ...
+	- consult
+		- consult_id
+			- date
+			- consultant
+...
+```
 
 # 추가중....

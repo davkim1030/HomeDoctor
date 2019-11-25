@@ -97,9 +97,9 @@ public class SignUpActivity extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         // Sign in success, update UI with the signed-in user's information
                                         Log.d(TAG, "createUserWithEmail:success");
+                                        // firebase db에 추가하는 부분
                                         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("user");
-                                        // 데이터베이스 스키마에 "."이 못 들어가므로 .을 !로 대체
-                                        mDatabase.child(email.replace(".","!"));
+                                        mDatabase.child(mAuth.getUid());
                                         mDatabase = mDatabase.child(email.replace(".","!"));
                                         mDatabase.child("name").setValue(editName.getText().toString());
                                         mDatabase.child("post_num").setValue(editPost.getText().toString());

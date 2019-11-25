@@ -47,6 +47,6 @@
     <string name="save_kr">저장</string>
     <string name="item_list_kr">상품 리스트</string>
     <string name="pay_kr">결재</string>
-    <string name="pay_success_kr">결재 완료!</string>
+    <string name="pay_success_kr">결제 완료</string>
     <string name="goto_main_kr">메인으로</string>
 </resources>

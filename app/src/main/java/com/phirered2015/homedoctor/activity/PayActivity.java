@@ -10,6 +10,9 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.phirered2015.homedoctor.R;
 import com.phirered2015.homedoctor.api.RequestHttpURLConnection;
 
@@ -23,11 +26,14 @@ import org.json.JSONObject;
 public class PayActivity extends AppCompatActivity {
     final String apiBaseUrl = "https://kapi.kakao.com/v1/payment/";
     final String linkBaseUrl = "https://developers.kakao.com/";
+    DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("user");
+    FirebaseAuth mAuth;
     String readyUrl;
     WebView webViewPay;
     Context mContext;
     String tid;
-    int state;
+    final String itemCode = "001"; //TODO: 이거 Intent 넘어오는 값으로 바꿔야 함
+    final String quantity = "1"; //TODO: 이거 Intent 넘어오는 값으로 바꿔야 함
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,20 +41,24 @@ public class PayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pay);
         getSupportActionBar().hide();
         mContext = this;
-        state = 0;
+        mAuth = FirebaseAuth.getInstance();
+        // TODO: 로그인 정보는 앱 세션을 통해 넘겨야 함
+        mAuth.signInWithEmailAndPassword("davkim1030@gmail.com", "431012");
 
         webViewPay = findViewById(R.id.webview_pay);
         webViewPay.getSettings().setJavaScriptEnabled(true);
         readyUrl = apiBaseUrl + getString(R.string.kakao_pay_ready_url);
 
         ContentValues payData = new ContentValues();
+        // TODO: Intent로 http body 추가 필요
         payData.put("cid", getString(R.string.kakao_pay_cid));
         payData.put("partner_order_id", getString(R.string.kakao_pay_partner_order_id));
         payData.put("partner_user_id", getString(R.string.kakao_pay_partner_user_id));
-        payData.put("item_name", "iPhone 11 블랙 64GB");
-        payData.put("quantity", "1");
-        payData.put("total_amount", "1100");
-        payData.put("vat_amount", "100");
+        payData.put("item_code", itemCode);
+        payData.put("item_name", "의자");
+        payData.put("quantity", quantity);
+        payData.put("total_amount", "22000");
+        payData.put("vat_amount", "2000");
         payData.put("tax_free_amount", "0");
         payData.put("approval_url", linkBaseUrl + getString(R.string.kakao_pay_approval_url));
         payData.put("fail_url", linkBaseUrl + getString(R.string.kakao_pay_fail_url));
@@ -84,21 +94,31 @@ public class PayActivity extends AppCompatActivity {
             super.onPostExecute(s);
             //doInBackground()로 부터 리턴된 값이 onPostExecute()의 매개변수로 넘어오므로 s를 출력한다.
             JSONObject result;
-            try {
-                result = new JSONObject(s);
-                webViewPay.loadUrl(result.getString("next_redirect_app_url"));
-                webViewPay.setWebChromeClient(new WebChromeClient());
-                webViewPay.setWebViewClient(new WebViewClientClass());
+            // ready api의 경우
+            if(s.contains("app_url")){
+                try {
+                    result = new JSONObject(s);                                             // JSON 데이터 파싱
+                    webViewPay.loadUrl(result.getString("next_redirect_app_url"));  // 결제창으로 webView redirect
+                    webViewPay.setWebChromeClient(new WebChromeClient());                   // 네이티브 웹으로 켜지 말고 앱 내에서 웹 구현
+                    webViewPay.setWebViewClient(new WebViewClientClass());
 
-                tid = result.getString("tid");
-                state = 1;
-                JSONObject next = new JSONObject();
-                // 카톡으로 넘어가는 부분
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(result.getString("android_app_scheme"))));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (NullPointerException e){
-                e.printStackTrace();
+                    tid = result.getString("tid");                                  // 결제 번호 저장
+                    // 카톡으로 넘어가는 부분
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(result.getString("android_app_scheme"))));
+                } catch (JSONException | NullPointerException e) {
+                    e.printStackTrace();
+                }
+            }
+            // approve api의 경우
+            else if(s.contains("aid")){
+
+                database = database.child(mAuth.getUid()).child("purchased").child(tid);
+                database.child("product_id").setValue(itemCode);
+                database.child("quantity").setValue(quantity);
+                database.child("status").setValue("결제 완료");
+                // TODO: Intent에 extra 붙여서 결과 알려주기
+                startActivity(new Intent(mContext, PaySuccessActivity.class));
+                finish();
             }
 
         }
@@ -133,7 +153,6 @@ public class PayActivity extends AppCompatActivity {
                 // AsyncTask를 통해 HttpURLConnection 수행.
                 NetworkTask nt = new NetworkTask(approveUrl, approveData);
                 nt.execute();
-                // 여기서 디비에 저장하는 코드 필요
 
             }
             view.loadUrl(url);
