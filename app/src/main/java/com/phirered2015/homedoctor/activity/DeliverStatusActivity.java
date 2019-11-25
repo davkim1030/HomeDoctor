@@ -14,14 +14,14 @@ import java.util.ArrayList;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class DeliverStateActivity extends AppCompatActivity {
+public class DeliverStatusActivity extends AppCompatActivity {
 
     Context mContext;
     ListView listView;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_deliver_state);
+        setContentView(R.layout.activity_deliver_status);
         mContext = this;
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);

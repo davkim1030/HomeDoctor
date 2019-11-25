@@ -93,7 +93,7 @@ public class TestActivity extends AppCompatActivity {
         btnList[9].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(mContext, DeliverStateActivity.class));
+                startActivity(new Intent(mContext, DeliverStatusActivity.class));
             }
         });
         btnList[10].setOnClickListener(new View.OnClickListener() {
