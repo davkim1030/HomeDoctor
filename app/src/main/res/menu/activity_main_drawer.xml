@@ -5,21 +5,26 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_mypage"
             android:title="마이 페이지"
             />
         <item
+            android:id="@+id/nav_basket"
             android:title="장바구니"
             />
         <item
+            android:id="@+id/nav_delivery"
             android:title="배송조회"
             />
         <item
+            android:id="@+id/nav_booking"
             android:title="예약확인/취소"
             />
     </group>
     <item android:title="상담예약">
         <menu>
             <item
+                android:id="@+id/nav_calling"
                 android:title="000-0000-0000"
                 />
             <item
