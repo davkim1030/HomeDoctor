@@ -99,8 +99,7 @@ public class SignUpActivity extends AppCompatActivity {
                                         Log.d(TAG, "createUserWithEmail:success");
                                         // firebase db에 추가하는 부분
                                         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("user");
-                                        mDatabase.child(mAuth.getUid());
-                                        mDatabase = mDatabase.child(email.replace(".","!"));
+                                        mDatabase = mDatabase.child(mAuth.getUid());
                                         mDatabase.child("name").setValue(editName.getText().toString());
                                         mDatabase.child("post_num").setValue(editPost.getText().toString());
                                         mDatabase.child("address").setValue(editAddress.getText().toString());

@@ -11,11 +11,15 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.phirered2015.homedoctor.R;
 import com.phirered2015.homedoctor.api.RequestHttpURLConnection;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -26,7 +30,7 @@ import org.json.JSONObject;
 public class PayActivity extends AppCompatActivity {
     final String apiBaseUrl = "https://kapi.kakao.com/v1/payment/";
     final String linkBaseUrl = "https://developers.kakao.com/";
-    DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("user");
+    DatabaseReference database = FirebaseDatabase.getInstance().getReference();
     FirebaseAuth mAuth;
     String readyUrl;
     WebView webViewPay;
@@ -34,6 +38,7 @@ public class PayActivity extends AppCompatActivity {
     String tid;
     final String itemCode = "001"; //TODO: 이거 Intent 넘어오는 값으로 바꿔야 함
     final String quantity = "1"; //TODO: 이거 Intent 넘어오는 값으로 바꿔야 함
+    String itemName, itemPrice;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,30 +50,49 @@ public class PayActivity extends AppCompatActivity {
         // TODO: 로그인 정보는 앱 세션을 통해 넘겨야 함
         mAuth.signInWithEmailAndPassword("davkim1030@gmail.com", "431012");
 
-        webViewPay = findViewById(R.id.webview_pay);
-        webViewPay.getSettings().setJavaScriptEnabled(true);
-        readyUrl = apiBaseUrl + getString(R.string.kakao_pay_ready_url);
+        // DB에서 상품 정보 가져오기
+        DatabaseReference product = database.child("product").child(itemCode);
+        product.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                // DB에서 상품 정보 가져오기
+                itemName = (String) dataSnapshot.child("name").getValue();
+                itemPrice = (String) dataSnapshot.child("price").getValue();
 
-        ContentValues payData = new ContentValues();
-        // TODO: Intent로 http body 추가 필요
-        payData.put("cid", getString(R.string.kakao_pay_cid));
-        payData.put("partner_order_id", getString(R.string.kakao_pay_partner_order_id));
-        payData.put("partner_user_id", getString(R.string.kakao_pay_partner_user_id));
-        payData.put("item_code", itemCode);
-        payData.put("item_name", "의자");
-        payData.put("quantity", quantity);
-        payData.put("total_amount", "22000");
-        payData.put("vat_amount", "2000");
-        payData.put("tax_free_amount", "0");
-        payData.put("approval_url", linkBaseUrl + getString(R.string.kakao_pay_approval_url));
-        payData.put("fail_url", linkBaseUrl + getString(R.string.kakao_pay_fail_url));
-        payData.put("cancel_url", linkBaseUrl + getString(R.string.kakao_pay_cancel_url));
+                webViewPay = findViewById(R.id.webview_pay);
+                webViewPay.getSettings().setJavaScriptEnabled(true);
+                readyUrl = apiBaseUrl + getString(R.string.kakao_pay_ready_url);
 
-        // AsyncTask를 통해 HttpURLConnection 수행.
-        NetworkTask networkTask = new NetworkTask(readyUrl, payData);
-        networkTask.execute();
+                ContentValues payData = new ContentValues();
+                // TODO: Intent로 http body 추가 필요
+                payData.put("cid", getString(R.string.kakao_pay_cid));
+                payData.put("partner_order_id", getString(R.string.kakao_pay_partner_order_id));
+                payData.put("partner_user_id", getString(R.string.kakao_pay_partner_user_id));
+                payData.put("item_code", itemCode);
+                payData.put("item_name", itemName);
+                payData.put("quantity", quantity);
+                payData.put("total_amount", itemPrice);
+                payData.put("vat_amount", String.valueOf(Integer.valueOf(itemPrice) / 11));     // 부가세 10%
+                payData.put("tax_free_amount", "0");
+                payData.put("approval_url", linkBaseUrl + getString(R.string.kakao_pay_approval_url));
+                payData.put("fail_url", linkBaseUrl + getString(R.string.kakao_pay_fail_url));
+                payData.put("cancel_url", linkBaseUrl + getString(R.string.kakao_pay_cancel_url));
+
+                // AsyncTask를 통해 HttpURLConnection 수행.
+                NetworkTask networkTask = new NetworkTask(readyUrl, payData);
+                networkTask.execute();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
     }
 
+    // 네트워크 통신 부분
     public class NetworkTask extends AsyncTask<Void, Void, String> {
 
         private String url;
@@ -112,9 +136,8 @@ public class PayActivity extends AppCompatActivity {
             // approve api의 경우
             else if(s.contains("aid")){
 
-                database = database.child(mAuth.getUid()).child("purchased").child(tid);
-                database.child("product_id").setValue(itemCode);
-                database.child("quantity").setValue(quantity);
+                database = database.child("user").child(mAuth.getUid()).child("purchased").child(tid);
+                database.child(itemCode).setValue(quantity);
                 database.child("status").setValue("결제 완료");
                 // TODO: Intent에 extra 붙여서 결과 알려주기
                 startActivity(new Intent(mContext, PaySuccessActivity.class));
@@ -124,9 +147,11 @@ public class PayActivity extends AppCompatActivity {
         }
     }
 
+    // http response로 넘어온 url 이동 하는 부분
     private class WebViewClientClass extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            // kakaotalk 앱으로 결제할 경우
             if (url != null && url.startsWith("intent://")) {
                 try {
                     Intent intent = Intent.parseUri(url, Intent.URI_INTENT_SCHEME);
@@ -138,7 +163,9 @@ public class PayActivity extends AppCompatActivity {
                 }catch (Exception e) {
                     e.printStackTrace();
                 }
-            } else{
+            }
+            // approval 승인 받는 경우
+            else{
                 view.loadUrl(url);
                 String pgToken = Uri.parse(webViewPay.getUrl()).getQueryParameter("pg_token");
                 String approveUrl = apiBaseUrl + "approve";
@@ -150,7 +177,7 @@ public class PayActivity extends AppCompatActivity {
                 approveData.put("partner_user_id", getString(R.string.kakao_pay_partner_user_id));
                 approveData.put("pg_token", pgToken);
 
-                // AsyncTask를 통해 HttpURLConnection 수행.
+                // 결제 승인
                 NetworkTask nt = new NetworkTask(approveUrl, approveData);
                 nt.execute();
 

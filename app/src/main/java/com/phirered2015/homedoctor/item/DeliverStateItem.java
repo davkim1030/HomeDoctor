@@ -1,10 +1,13 @@
 package com.phirered2015.homedoctor.item;
 
+import android.graphics.drawable.Drawable;
+
 public class DeliverStateItem {
     private String name, state;
-    private int price, img;
+    private int price;
+    Drawable img;
 
-    public DeliverStateItem(String name, String state, int price, int img){
+    public DeliverStateItem(String name, String state, int price, Drawable img){
         this.name = name;
         this.state = state;
         this.price = price;
@@ -19,11 +22,11 @@ public class DeliverStateItem {
         this.state = state;
     }
 
-    public int getImg() {
+    public Drawable getImg() {
         return img;
     }
 
-    public void setImg(int img) {
+    public void setImg(Drawable img) {
         this.img = img;
     }
 
