@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
                 .build();
         NavController nc = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, nc, mAppBarConfiguration);
+        nv.setNavigationItemSelectedListener();
+        NavigationUI.setupWithNavController(nv, nc);
 
     }
     /*
