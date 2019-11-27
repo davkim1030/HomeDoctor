@@ -79,13 +79,20 @@
         android:layout_margin="10dp"
         android:background="@color/colorAccent"
         android:text="deliver state"/>
-    <Button
-        android:id="@+id/btn_pay"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@color/colorAccent"
-        android:text="pay"/>
+        <Button
+            android:id="@+id/btn_pay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@color/colorAccent"
+            android:text="pay"/>
+        <Button
+            android:id="@+id/btn_mypage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@color/colorAccent"
+            android:text="my page"/>
     </LinearLayout>
 
 </ScrollView>

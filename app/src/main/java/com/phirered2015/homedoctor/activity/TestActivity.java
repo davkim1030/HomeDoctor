@@ -21,7 +21,7 @@ public class TestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_test);
 
         mContext = this;
-        btnList = new Button[11];
+        btnList = new Button[12];
         btnList[0] = findViewById(R.id.btn_splash);
         btnList[1] = findViewById(R.id.btn_tutorial);
         btnList[2] = findViewById(R.id.btn_login);
@@ -33,6 +33,7 @@ public class TestActivity extends AppCompatActivity {
         btnList[8] = findViewById(R.id.btn_pay_result);
         btnList[9] = findViewById(R.id.btn_deliver_state);
         btnList[10] = findViewById(R.id.btn_pay);
+        btnList[11] = findViewById(R.id.btn_mypage);
 
 
         // onClickListener 설정
@@ -100,6 +101,12 @@ public class TestActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(mContext, PayActivity.class));
+            }
+        });
+        btnList[11].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(mContext, MyPageActivity.class));
             }
         });
 

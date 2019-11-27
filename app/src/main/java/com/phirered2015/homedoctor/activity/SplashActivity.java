@@ -27,7 +27,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Intent intent;
-                if(!UID.equals(""))
+                if(UID.equals(""))
                     intent = new Intent(getApplicationContext(), TutorialActivity.class);
                 else
                     intent = new Intent(getApplicationContext(), MainActivity.class);
