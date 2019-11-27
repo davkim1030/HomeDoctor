@@ -1,13 +1,15 @@
 package com.phirered2015.homedoctor.item;
 
-import android.graphics.drawable.Drawable;
+import android.net.Uri;
+
+import com.google.firebase.storage.StorageReference;
 
 public class DeliverStateItem {
     private String name, state;
     private int price;
-    Drawable img;
+    StorageReference img;
 
-    public DeliverStateItem(String name, String state, int price, Drawable img){
+    public DeliverStateItem(String name, String state, int price, StorageReference img){
         this.name = name;
         this.state = state;
         this.price = price;
@@ -22,11 +24,11 @@ public class DeliverStateItem {
         this.state = state;
     }
 
-    public Drawable getImg() {
+    public StorageReference getImg() {
         return img;
     }
 
-    public void setImg(Drawable img) {
+    public void setImg(StorageReference img) {
         this.img = img;
     }
 
