@@ -1,26 +1,18 @@
 package com.phirered2015.homedoctor.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.widget.TextView;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import android.view.View;
+import android.widget.Button;
 import com.phirered2015.homedoctor.R;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class DetailActivity extends AppCompatActivity {
 
-    private DatabaseReference dr;
-    static boolean called = false;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,27 +20,22 @@ public class DetailActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
+        Button cart = findViewById(R.id.detailCartBtn);
+        Button purchase = findViewById(R.id.detailPurchaseBtn);
 
-        // Textview 모음
-        TextView productname = findViewById(R.id.productName); // 상품명
-        TextView price = findViewById(R.id.price); // 가격
-        TextView decstext = findViewById(R.id.descText); // 상품 상세 설명
-
-        if(!called){
-            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-            called = true;
-        }
-        FirebaseDatabase db = FirebaseDatabase.getInstance();
-
-        dr.addListenerForSingleValueEvent(new ValueEventListener() {
+        cart.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), BasketActivity.class);
+                startActivity(intent);
             }
+        });
 
+        purchase.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), PayInfoActivity.class);
+                startActivity(intent);
             }
         });
     }

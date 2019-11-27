@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/img_gridview"
+        android:layout_width="205dp"
+        android:layout_height="205dp"
+        android:src="@drawable/chair"/>
+
+<LinearLayout
+    android:layout_width="205dp"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/name_gridview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="상품명"
+        android:textSize="17sp"/>
+    <Button
+        android:id="@+id/btn_gridview"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="128dp"
+        />
+
+</LinearLayout>
+
+    <TextView
+        android:id="@+id/price_gridview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:text="10000원"
+        android:textSize="20sp"/>
+
+
+</LinearLayout>

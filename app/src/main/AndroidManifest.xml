@@ -20,8 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MainActivity" android:label="Home Doctor"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".activity.MainActivity" android:label="Home Doctor"/>
         <activity android:name=".activity.SignUpActivity" android:label="@string/sign_up_kr"/>
         <activity android:name=".activity.TutorialActivity"/>
         <activity android:name=".activity.LoginActivity"/>

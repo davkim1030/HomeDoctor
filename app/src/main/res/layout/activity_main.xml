@@ -6,13 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-<TextView
+<GridView
+    android:id="@+id/main_gridview"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:text="Main Activity"
+    android:columnWidth="100dp"
+    android:numColumns="2"
     />
-
 
 
 </LinearLayout>
