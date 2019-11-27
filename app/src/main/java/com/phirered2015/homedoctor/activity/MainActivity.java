@@ -51,10 +51,12 @@ public class MainActivity extends AppCompatActivity{
             "10000",
             "20000"
     };
+    String UID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        UID = getSharedPreferences("firebase_uid_pref", MODE_PRIVATE).getString("UID", "");
         CustomList adapter = new CustomList(MainActivity.this);
         gridView = findViewById(R.id.main_gridview);
         gridView.setAdapter(adapter);

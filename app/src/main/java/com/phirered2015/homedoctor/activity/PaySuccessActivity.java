@@ -47,11 +47,12 @@ public class PaySuccessActivity extends AppCompatActivity {
             "10000",
             "20000"
     };
-
+    String UID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay_success);
+        UID = getSharedPreferences("firebase_uid_pref", MODE_PRIVATE).getString("UID", "");
         PaySuccessActivity.CustomList adapter = new PaySuccessActivity.CustomList(PaySuccessActivity.this);
         list= findViewById(R.id.shopping_list);
         list.setAdapter(adapter);

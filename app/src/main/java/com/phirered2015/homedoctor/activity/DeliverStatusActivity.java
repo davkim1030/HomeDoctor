@@ -29,7 +29,7 @@ public class DeliverStatusActivity extends AppCompatActivity {
     ListView listView;
     DatabaseReference mRef = FirebaseDatabase.getInstance().getReference();
     ArrayList<DeliverStateItem> items = new ArrayList<>();
-    String UID = "hCCBV48ChFTR5AQOZ29QhImL4F12";
+    String UID;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -38,6 +38,7 @@ public class DeliverStatusActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
+        UID = getSharedPreferences("firebase_uid_pref", MODE_PRIVATE).getString("UID", "");
         listView = findViewById(R.id.list_deliver_state);
 
         // TODO: 로그인 정보는 앱 세션을 통해 넘겨야 함
