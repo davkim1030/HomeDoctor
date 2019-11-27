@@ -9,4 +9,5 @@
     <color name="gray">#777</color>
     <color name="l_gray">#ccc</color>
     <color name="transparent">#0FFF</color>
+    <color name="trans_gray">#2FFF</color>
 </resources>

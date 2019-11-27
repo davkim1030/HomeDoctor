@@ -1,6 +1,7 @@
 package com.phirered2015.homedoctor.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,12 +24,14 @@ public class TutorialActivity extends AppCompatActivity {
     private ArrayList<TutorialItem> tutorialItems;
     private CircleAnimIndicator indicator;
     ImageButton btnLeft, btnRight;
+    Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tutorial);
         getSupportActionBar().hide();
+        mContext = this;
 
         btnLeft = findViewById(R.id.btn_left);
         btnRight = findViewById(R.id.btn_right);
@@ -78,7 +81,7 @@ public class TutorialActivity extends AppCompatActivity {
     // viewpager 초기화
     private void initViewPager() {
         ViewPagerAdapter viewPagerAdapter =
-                new ViewPagerAdapter(getApplicationContext(), tutorialItems);
+                new ViewPagerAdapter(getApplicationContext(), tutorialItems, (Activity)mContext);
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.addOnPageChangeListener(mOnPageChangeListener);
 

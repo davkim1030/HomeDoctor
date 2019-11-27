@@ -22,10 +22,11 @@ public class ViewPagerAdapter extends PagerAdapter {
 
     private Context mContext;
     private ArrayList<TutorialItem> itemList;
-
-    public ViewPagerAdapter(Context context, ArrayList<TutorialItem> list) {
+    private Activity activity;
+    public ViewPagerAdapter(Context context, ArrayList<TutorialItem> list, Activity activity) {
         mContext = context;
         itemList = list;
+        this.activity = activity;
     }
 
     @Override
@@ -59,6 +60,7 @@ public class ViewPagerAdapter extends PagerAdapter {
                     @Override
                     public void onClick(View view) {
                         mContext.startActivity(new Intent(mContext, itemList.get(position).getActivity()));
+                        activity.finish();
                     }
                 });
             }
@@ -73,6 +75,7 @@ public class ViewPagerAdapter extends PagerAdapter {
     public void destroyItem(ViewGroup container, int position, Object object){
         container.removeView((View) object);
     }
+
 
 
 }

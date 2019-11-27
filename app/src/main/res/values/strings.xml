@@ -49,4 +49,5 @@
     <string name="pay_kr">결재</string>
     <string name="pay_success_kr">결제 완료</string>
     <string name="goto_main_kr">메인으로</string>
+    <string name="logout_kr">로그아웃</string>
 </resources>

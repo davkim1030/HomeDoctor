@@ -1,10 +1,14 @@
 package com.phirered2015.homedoctor.activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,6 +31,7 @@ public class DeliverStatusActivity extends AppCompatActivity {
 
     Context mContext;
     ListView listView;
+    ProgressBar progressBar;
     DatabaseReference mRef = FirebaseDatabase.getInstance().getReference();
     ArrayList<DeliverStateItem> items = new ArrayList<>();
     String UID;
@@ -40,6 +45,7 @@ public class DeliverStatusActivity extends AppCompatActivity {
         actionBar.setHomeButtonEnabled(true);
         UID = getSharedPreferences("firebase_uid_pref", MODE_PRIVATE).getString("UID", "");
         listView = findViewById(R.id.list_deliver_state);
+        progressBar = findViewById(R.id.progress_circular);
 
         // TODO: 로그인 정보는 앱 세션을 통해 넘겨야 함
 
@@ -57,6 +63,7 @@ public class DeliverStatusActivity extends AppCompatActivity {
                 }
                 DeliverListAdapter adapter = new DeliverListAdapter(mContext, items);
                 listView.setAdapter(adapter);
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override

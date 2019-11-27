@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     Button login, signup;
     private EditText id, pwd;
     CheckBox idSave, autoLogin;
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceStated){
         super.onCreate(savedInstanceStated);
@@ -43,12 +45,14 @@ public class LoginActivity extends AppCompatActivity {
         signup = (Button) findViewById(R.id.registerBtn);
         idSave = (CheckBox) findViewById(R.id.checkIdsave);
         autoLogin = (CheckBox) findViewById(R.id.checkAutologin);
+        progressBar = findViewById(R.id.progress_circular);
 
         //로그인 버튼 리스너
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // 값이 다 있고 로그인 정보가 맞으면 로그인 정보를 가지고 MainActivity로 인텐트
+                progressBar.setVisibility(View.VISIBLE);
                 if (!id.getText().toString().isEmpty() && !pwd.getText().toString().isEmpty())
                     mAuth.signInWithEmailAndPassword(id.getText().toString(), pwd.getText().toString())
                             .addOnCompleteListener((Activity) mContext, new OnCompleteListener<AuthResult>() {
@@ -68,12 +72,15 @@ public class LoginActivity extends AppCompatActivity {
                                         Log.w(TAG, "signInWithEmail:failure", task.getException());
                                         Toast.makeText(mContext, "잘못된 아이디나 비밀번호입니다",
                                                 Toast.LENGTH_SHORT).show();
+                                        progressBar.setVisibility(View.GONE);
                                     }
 
                                 }
                             });
-                else
+                else{
                     Toast.makeText(mContext, "ID와 비밀번호를 모두 입력해주세요", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
+                }
             }
         });
         //회원가입 버튼 리스너
