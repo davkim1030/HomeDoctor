@@ -50,7 +50,7 @@ public class BasketActivity extends AppCompatActivity {
             "10000",
             "20000"
     };
-
+    String UID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +58,7 @@ public class BasketActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
+        UID = getSharedPreferences("firebase_uid_pref", MODE_PRIVATE).getString("UID", "");
         CustomList adapter = new CustomList(BasketActivity.this);
         list= findViewById(R.id.shopping_list);
         list.setAdapter(adapter);

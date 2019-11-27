@@ -58,6 +58,7 @@ public class LoginActivity extends AppCompatActivity {
                                         // Sign in success, update UI with the signed-in user's information
                                         Log.d(TAG, "signInWithEmail:success");
                                         FirebaseUser user = mAuth.getCurrentUser();
+                                        setFirebaseSession();   // sharedPreference에 firebase_uid_pref라는 곳에 uid 저장함; 세션 유지
                                         Intent loginIntent = new Intent(mContext, MainActivity.class);
                                         loginIntent.putExtra("firebaseUser", user);
                                         startActivity(loginIntent);
@@ -116,6 +117,7 @@ public class LoginActivity extends AppCompatActivity {
                 if(checked){
                     editor.putString("id", idstr);
                     editor.putString("pwd", pwdstr);
+                    editor.putString("UID", mAuth.getUid());
                     editor.commit();
                    if(loginid != null && loginpwd != null){
                        if(loginid.equals(id.getText().toString()) && loginpwd.equals(pwd.getText().toString())){
@@ -132,6 +134,13 @@ public class LoginActivity extends AppCompatActivity {
                     editor.commit();
                 }
         }
+    }
+
+    void setFirebaseSession(){
+        SharedPreferences pref = getSharedPreferences("firebase_uid_pref", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("UID", mAuth.getUid());
+        editor.apply();
     }
 }
 

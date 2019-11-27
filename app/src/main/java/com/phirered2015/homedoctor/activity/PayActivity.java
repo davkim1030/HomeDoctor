@@ -39,16 +39,14 @@ public class PayActivity extends AppCompatActivity {
     final String itemCode = "001"; //TODO: 이거 Intent 넘어오는 값으로 바꿔야 함
     final String quantity = "1"; //TODO: 이거 Intent 넘어오는 값으로 바꿔야 함
     String itemName, itemPrice;
-
+    String UID;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay);
         getSupportActionBar().hide();
         mContext = this;
-        mAuth = FirebaseAuth.getInstance();
-        // TODO: 로그인 정보는 앱 세션을 통해 넘겨야 함
-        mAuth.signInWithEmailAndPassword("davkim1030@gmail.com", "431012");
+        UID = getSharedPreferences("firebase_uid_pref", MODE_PRIVATE).getString("UID", "");
 
         // DB에서 상품 정보 가져오기
         DatabaseReference product = database.child("product").child(itemCode);
@@ -136,7 +134,7 @@ public class PayActivity extends AppCompatActivity {
             // approve api의 경우
             else if(s.contains("aid")){
 
-                database = database.child("user").child(mAuth.getUid()).child("purchased").child(tid);
+                database = database.child("user").child(UID).child("purchased").child(tid);
                 database.child(itemCode).setValue(quantity);
                 database.child("status").setValue("결제 완료");
                 // TODO: Intent에 extra 붙여서 결과 알려주기

@@ -12,20 +12,25 @@ import androidx.appcompat.app.AppCompatActivity;
 public class SplashActivity extends AppCompatActivity {
     private Handler mHandler;
     private Runnable mRunnable;
+    String UID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         getSupportActionBar().hide();
+        UID = getSharedPreferences("firebase_uid_pref", MODE_PRIVATE).getString("UID", "");
 
 
         // MainActivity.class 자리에 다음에 넘어갈 액티비티를 넣어주기
         mRunnable = new Runnable() {
             @Override
             public void run() {
-
-                Intent intent = new Intent(getApplicationContext(), TutorialActivity.class);
+                Intent intent;
+                if(!UID.equals(""))
+                    intent = new Intent(getApplicationContext(), TutorialActivity.class);
+                else
+                    intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
                 finish();
             }

@@ -11,6 +11,7 @@ import com.phirered2015.homedoctor.R;
 
 public class MyPageActivity extends AppCompatActivity {
 
+    String UID;
     @Override
     protected void onCreate(Bundle savedInstanceStated){
         super.onCreate(savedInstanceStated);
@@ -18,6 +19,7 @@ public class MyPageActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
+        UID = getSharedPreferences("firebase_uid_pref", MODE_PRIVATE).getString("UID", "");
     }
 
     @Override
