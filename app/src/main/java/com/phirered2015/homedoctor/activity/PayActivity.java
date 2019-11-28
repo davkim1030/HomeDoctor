@@ -133,10 +133,13 @@ public class PayActivity extends AppCompatActivity {
             }
             // approve api의 경우
             else if(s.contains("aid")){
-
+                String exec = Integer.valueOf(itemCode) > 20 && Integer.valueOf(itemCode) <= 40? ".PNG" : ".jpg";
                 database = database.child("user").child(UID).child("purchased").child(tid);
                 database.child(itemCode).setValue(quantity);
                 database.child("status").setValue("결제 완료");
+                database.child("amount").setValue(itemPrice);
+                database.child("thumbnail").setValue(itemCode + exec);
+                database.child("title").setValue(itemName);
                 // TODO: Intent에 extra 붙여서 결과 알려주기
                 startActivity(new Intent(mContext, PaySuccessActivity.class));
                 finish();
