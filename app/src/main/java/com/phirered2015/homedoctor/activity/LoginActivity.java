@@ -44,7 +44,6 @@ public class LoginActivity extends AppCompatActivity {
         login = (Button) findViewById(R.id.loginBtn);
         signup = (Button) findViewById(R.id.registerBtn);
         idSave = (CheckBox) findViewById(R.id.checkIdsave);
-        autoLogin = (CheckBox) findViewById(R.id.checkAutologin);
         progressBar = findViewById(R.id.progress_circular);
 
         //로그인 버튼 리스너
@@ -119,27 +118,7 @@ public class LoginActivity extends AppCompatActivity {
                     editor.remove("id");
                     editor.commit();
                 }
-            case R.id.checkAutologin:
-                // 자동 로그인 기능
-                if(checked){
-                    editor.putString("id", idstr);
-                    editor.putString("pwd", pwdstr);
-                    editor.putString("UID", mAuth.getUid());
-                    editor.commit();
-                   if(loginid != null && loginpwd != null){
-                       if(loginid.equals(id.getText().toString()) && loginpwd.equals(pwd.getText().toString())){
-                            Intent loginintent = new Intent(mContext, MainActivity.class);
-                            startActivity(loginintent);
-                            finish();
-                       }
-                   }
-                }
 
-                else {
-                    editor.remove("id");
-                    editor.remove("pwd");
-                    editor.commit();
-                }
         }
     }
 
