@@ -63,7 +63,7 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 StorageReference topimg = FirebaseStorage.getInstance().getReference("thumbnail/" + dataSnapshot.child("thumbnail").getValue());
-                StorageReference descimg = FirebaseStorage.getInstance().getReference("desc_img/" + "a" + dataSnapshot.child("desc_images").child("0").getValue());
+                StorageReference descimg = FirebaseStorage.getInstance().getReference("desc_img/" + dataSnapshot.child("desc_images").child("0").getValue());
                 Glide.with(mContext).load(topimg).into(topImage);
                 productName.setText((String) dataSnapshot.child("name").getValue());
                 productPrice.setText((String) dataSnapshot.child("price").getValue());
