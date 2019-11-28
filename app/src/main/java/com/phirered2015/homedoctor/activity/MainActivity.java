@@ -34,6 +34,14 @@ public class MainActivity extends AppCompatActivity{
         mContext = this;
         UID = getSharedPreferences("firebase_uid_pref", MODE_PRIVATE).getString("UID", "");
         gridView = findViewById(R.id.main_gridview);
+
+        /*
+        mRef.child("product").addValueEventListener(new ValueEventListener(){...});
+        파이어베이스 product/ 로부터 데이터 수신후 items에 추가
+        DataSnapshot i = product/ 이하 모든 키
+        i.child("product/ 이하 키 중 하나")로 이어가기
+         */
+
         mRef.child("product").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

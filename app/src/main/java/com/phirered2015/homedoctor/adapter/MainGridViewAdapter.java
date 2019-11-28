@@ -8,18 +8,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
+
 import com.phirered2015.homedoctor.R;
 import com.phirered2015.homedoctor.activity.DetailActivity;
 import com.phirered2015.homedoctor.item.MainGridItem;
@@ -59,11 +50,16 @@ public class MainGridViewAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.item_main, viewGroup, false);
         }
+
+        /*
+        view.setOnClickListener(new View.OnClickListener(){...});
+        그리드 뷰에서 클릭 시 i 값 전달 받은 후 Detail activity로 전달
+        */
+
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                         Intent intent = new Intent(mContext, DetailActivity.class);
-                Toast.makeText(mContext, "" + i, Toast.LENGTH_SHORT).show();
                         intent.putExtra("gridpos", i);
                         mContext.startActivity(intent);
                     }

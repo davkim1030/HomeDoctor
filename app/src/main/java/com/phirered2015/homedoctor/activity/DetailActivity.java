@@ -19,20 +19,15 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.phirered2015.homedoctor.R;
-import com.phirered2015.homedoctor.item.DetailItem;
-import com.phirered2015.homedoctor.item.MainGridItem;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
-
 public class DetailActivity extends AppCompatActivity {
     Context mContext;
     String UID;
-    ArrayList<DetailItem> items = new ArrayList<>();
     DatabaseReference mRef = FirebaseDatabase.getInstance().getReference();
     String posstr;
     String prefix = "00";
@@ -47,6 +42,7 @@ public class DetailActivity extends AppCompatActivity {
         mContext = this;
         UID = getSharedPreferences("firebase_uid_pref", MODE_PRIVATE).getString("UID", "");
 
+        // 뷰 선언
         final ImageView topImage = findViewById(R.id.detailImage);
         final TextView productName = findViewById(R.id.productName);
         final TextView productPrice = findViewById(R.id.productPrice);
@@ -55,10 +51,18 @@ public class DetailActivity extends AppCompatActivity {
         Button cart = findViewById(R.id.detailCartBtn);
         Button purchase = findViewById(R.id.detailPurchaseBtn);
 
+        //이전 intent로 부터 값 전달 받음
         Intent intent = getIntent();
         pos = intent.getExtras().getInt("gridpos");
         int i = pos + 1;
-        posstr = prefix + i;
+        posstr = prefix + i; // 그리드뷰 위치 변수; Main activity로 부터 넘어옴; MainGridViewAdapter에 구현
+
+        /*
+        mRef.child("product").child(posstr).addValueEventListener(new ValueEventListener(){...});
+        파이어베이스 product/posstr(해당 그리드 위치)에서 데이터 수신 후 View로 표출
+        dataSnapshot = possrt(해당 그리드 위치)
+         */
+
         mRef.child("product").child(posstr).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -79,7 +83,7 @@ public class DetailActivity extends AppCompatActivity {
         });
 
 
-
+        //장바구니 버튼 제어
         cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,7 +91,7 @@ public class DetailActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+        //구매하기 버튼 제어
         purchase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
