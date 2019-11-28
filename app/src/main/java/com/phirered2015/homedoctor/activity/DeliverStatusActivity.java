@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,7 +29,6 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class DeliverStatusActivity extends AppCompatActivity {
-
     Context mContext;
     ListView listView;
     ProgressBar progressBar;
@@ -46,8 +46,6 @@ public class DeliverStatusActivity extends AppCompatActivity {
         UID = getSharedPreferences("firebase_uid_pref", MODE_PRIVATE).getString("UID", "");
         listView = findViewById(R.id.list_deliver_state);
         progressBar = findViewById(R.id.progress_circular);
-
-        // TODO: 로그인 정보는 앱 세션을 통해 넘겨야 함
 
         Log.e("data", mRef.child("user").child(UID).child("purchased").toString());
         mRef.child("user").child(UID).child("purchased").addValueEventListener(new ValueEventListener() {
