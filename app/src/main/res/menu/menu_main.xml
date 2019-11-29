@@ -1,0 +1,32 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="cte.yonsei.myapplication.MainActivity">
+
+    <item
+        android:id="@+id/menu_logout"
+        android:title="@string/logout_kr"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/menu_mypage"
+        android:title="마이 페이지"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_launcher_foreground"
+        />
+    <item
+        android:id="@+id/menu_basket"
+        android:title="장바구니"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_delivery"
+        android:title="배송 조회"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_booking"
+        android:title="예약 확인"
+        app:showAsAction="never" />
+
+</menu>
