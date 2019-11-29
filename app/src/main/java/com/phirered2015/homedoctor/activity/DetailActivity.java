@@ -19,6 +19,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.phirered2015.homedoctor.R;
+import com.phirered2015.homedoctor.dialog.DialogBasket;
+import com.phirered2015.homedoctor.dialog.DialogPurchase;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -87,16 +89,21 @@ public class DetailActivity extends AppCompatActivity {
         cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), BasketActivity.class);
-                startActivity(intent);
+                Intent intent = new Intent(mContext, BasketActivity.class);
+                intent.putExtra("gridnum", posstr);
+                DialogBasket db = new DialogBasket(mContext);
+                db.callFunc();
             }
         });
+
         //구매하기 버튼 제어
         purchase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), PayInfoActivity.class);
-                startActivity(intent);
+                Intent intent = new Intent(mContext, PayInfoActivity.class);
+                intent.putExtra("gridnum", posstr);
+                DialogPurchase dp = new DialogPurchase(mContext);
+                dp.callFunc();
             }
         });
     }
