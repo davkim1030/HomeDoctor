@@ -72,7 +72,7 @@ public class DetailActivity extends AppCompatActivity {
                 StorageReference descimg = FirebaseStorage.getInstance().getReference("desc_img/" + dataSnapshot.child("desc_images").child("0").getValue());
                 Glide.with(mContext).load(topimg).into(topImage);
                 productName.setText((String) dataSnapshot.child("name").getValue());
-                productPrice.setText((String) dataSnapshot.child("price").getValue());
+                productPrice.setText((String) dataSnapshot.child("price").getValue() + "원");
                 descText.setText((String) dataSnapshot.child("description").getValue());
                 Glide.with(mContext).load(descimg).into(descImage);
                 Log.e("text", descimg.toString());
