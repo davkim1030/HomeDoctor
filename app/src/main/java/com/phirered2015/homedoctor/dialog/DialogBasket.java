@@ -37,7 +37,7 @@ public class DialogBasket {
 
         // 수량 0 일시 구매버튼 비활성화
         if(ctr[0] == 0){
-            adder.setBackgroundColor(Color.parseColor("#CCCCCC"));
+            adder.setTextColor(Color.parseColor("#CCCCCC"));
         }
 
         decrease.setOnClickListener(new View.OnClickListener() {
@@ -51,7 +51,7 @@ public class DialogBasket {
 
                 //수량 0으로 돌아올 시 버튼 비활성화
                 if(count.getText().toString().equals("0"))
-                    adder.setBackgroundColor(Color.parseColor("#CCCCCC"));
+                    adder.setTextColor(Color.parseColor("#CCCCCC"));
             }
         });
 
@@ -60,7 +60,7 @@ public class DialogBasket {
             public void onClick(View view) {
                 ctr[0]++;
                 count.setText(String.valueOf(ctr[0]));
-                adder.setBackgroundColor(Color.parseColor("#1a75d2"));
+                adder.setTextColor(Color.parseColor("#1a75d2"));
             }
         });
 

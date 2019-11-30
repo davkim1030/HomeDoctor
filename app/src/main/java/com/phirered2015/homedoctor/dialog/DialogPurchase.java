@@ -39,7 +39,7 @@ public class DialogPurchase {
 
         // 수량 0 일시 구매버튼 비활성화
         if(ctr[0] == 0){
-            purchase.setBackgroundColor(Color.parseColor("#CCCCCC"));
+            purchase.setTextColor(Color.parseColor("#CCCCCC"));
         }
 
         decrease.setOnClickListener(new View.OnClickListener() {
@@ -53,7 +53,7 @@ public class DialogPurchase {
 
                 //수량 0으로 돌아올 시 버튼 비활성화
                 if(count.getText().toString().equals("0"))
-                    purchase.setBackgroundColor(Color.parseColor("#CCCCCC"));
+                    purchase.setTextColor(Color.parseColor("#CCCCCC"));
             }
         });
 
@@ -63,7 +63,7 @@ public class DialogPurchase {
                 //TODO: 수량 제한 있으면 변경
                 ctr[0]++;
                 count.setText(String.valueOf(ctr[0]));
-                purchase.setBackgroundColor(Color.parseColor("#1a75d2"));
+                purchase.setTextColor(Color.parseColor("#1a75d2"));
 
             }
         });
