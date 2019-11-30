@@ -1,8 +1,11 @@
 package com.phirered2015.homedoctor.activity;
 
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.GridView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -93,7 +97,20 @@ public class MainActivity extends AppCompatActivity{
         int id = item.getItemId();
         switch (id){
             case R.id.menu_logout:
-                //TODO: Firebase logout 기능 선언
+                final AlertDialog.Builder logoutDialog = new AlertDialog.Builder(mContext);
+                logoutDialog.setTitle("로그아웃 하시겠습니까?");
+                logoutDialog.setPositiveButton("로그아웃", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        SharedPreferences mPref = getSharedPreferences("firebase_uid_pref", Activity.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = mPref.edit();
+                        editor.remove("UID");
+                        editor.apply();
+                        startActivity(new Intent(mContext, LoginActivity.class));
+                        finish();
+                    }
+                });
+                logoutDialog.show();
                 break;
             case R.id.menu_mypage:
                 Intent mypageintent = new Intent(mContext, MyPageActivity.class);

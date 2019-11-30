@@ -84,7 +84,8 @@ public class DialogPurchase {
                     Intent intent = new Intent(mContext, PayInfoActivity.class);
                     intent.putExtra("toBuy", ctr[0]);
                     mContext.startActivity(intent);
-
+                    ctr[0] = 0;
+                    dlg.dismiss();
                 }
             }
         });

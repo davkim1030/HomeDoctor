@@ -79,6 +79,8 @@ public class DialogBasket {
                     Intent intent = new Intent(mContext, BasketActivity.class);
                     intent.putExtra("toAdd", ctr[0]);
                     mContext.startActivity(intent);
+                    ctr[0] = 0;
+                    dlg.dismiss();
                 }
             }
         });
