@@ -1,81 +1,54 @@
 package com.phirered2015.homedoctor.activity;
 
-import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
+import android.widget.Button;
 import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.phirered2015.homedoctor.R;
 
-public class PaySuccessActivity extends AppCompatActivity {
-    ListView list;
-    String[] titles = {
-            "의자",
-            "책상",
-            "의자",
-            "책상",
-            "의자",
-            "책상",
-            "의자",
-            "책상"
-    } ;
-    Integer[] images = {
-            R.drawable.chair,
-            R.drawable.desk,
-            R.drawable.chair,
-            R.drawable.desk,
-            R.drawable.chair,
-            R.drawable.desk,
-            R.drawable.chair,
-            R.drawable.desk
-    };
+import androidx.appcompat.app.AppCompatActivity;
 
-    String[] prices = {
-            "10000",
-            "20000",
-            "10000",
-            "20000",
-            "10000",
-            "20000",
-            "10000",
-            "20000"
-    };
+public class PaySuccessActivity extends AppCompatActivity {
     String UID;
+    TextView txtName,txtPhone, txtPost, txtAddress, txtDetailAddress;
+    Button btnMain;
+    String itemName, itemPrice;
+    Context mContext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay_success);
+        mContext = this;
         UID = getSharedPreferences("firebase_uid_pref", MODE_PRIVATE).getString("UID", "");
-        PaySuccessActivity.CustomList adapter = new PaySuccessActivity.CustomList(PaySuccessActivity.this);
-        list= findViewById(R.id.shopping_list);
-        list.setAdapter(adapter);
-    }
-    public class CustomList extends ArrayAdapter<String> {
-        private final Activity context;
-        public CustomList(Activity context ) {
-            super(context, R.layout.item_list_read_only, titles);
-            this.context = context;
-        }
-        @Override
-        public View getView(int position, View view, ViewGroup parent) {
-            LayoutInflater inflater = context.getLayoutInflater();
-            View rowView= inflater.inflate(R.layout.item_list_read_only, null, true);
-            ImageView imageView = (ImageView) rowView.findViewById(R.id.image);
-            TextView title = (TextView) rowView.findViewById(R.id.item_name);
-            TextView price = (TextView) rowView.findViewById(R.id.item_price);
+        Intent intent = getIntent();
 
-            title.setText(titles[position]);
-            imageView.setImageResource(images[position]);
-            price.setText(prices[position]);
-            return rowView;
-        }
+        itemName = intent.getStringExtra("itemName");
+        itemPrice = intent.getStringExtra("itemPrice");
+
+        txtName = findViewById(R.id.text_name);
+        txtPhone = findViewById(R.id.text_phone);
+        txtPost = findViewById(R.id.text_post_num);
+        txtAddress = findViewById(R.id.text_address);
+        txtDetailAddress = findViewById(R.id.text_detail_address);
+        btnMain = findViewById(R.id.btn_main);
+
+
+        btnMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                startActivity(new Intent(mContext, MainActivity.class));
+                finish();
+            }
+        });
     }
 
+    @Override
+    public void onBackPressed() {
+//        startActivity(new Intent(mContext, MainActivity.class));
+        finish();
+    }
 }

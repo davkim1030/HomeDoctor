@@ -1,6 +1,7 @@
 package com.phirered2015.homedoctor.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,6 +9,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -34,6 +38,9 @@ import java.util.ArrayList;
 
 public class BasketActivity extends AppCompatActivity {
     ListView listView;
+    CheckBox checkAll;
+    Button btnDelete, btnPurchase;
+    TextView txtTotalAmount;
     ArrayList<DeliverStateItem> items = new ArrayList<>();
     String UID;
     Context mContext;
@@ -49,9 +56,16 @@ public class BasketActivity extends AppCompatActivity {
         actionBar.setHomeButtonEnabled(true);
         UID = getSharedPreferences("firebase_uid_pref", MODE_PRIVATE).getString("UID", "");
 
+        checkAll = findViewById(R.id.checkbox_all);
+        btnDelete = findViewById(R.id.delete_all);
+        btnPurchase = findViewById(R.id.order);
+        txtTotalAmount = findViewById(R.id.txt_total_amount);
+
         listView = findViewById(R.id.shopping_list);
         progressBar = findViewById(R.id.progress_circular);
 
+
+        // db에서 데이터 가져와서 list뷰에 넣는 부분
         mRef.child("user").child(UID).child("basket").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -76,7 +90,24 @@ public class BasketActivity extends AppCompatActivity {
             }
         });
 
-    }
+        btnPurchase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ArrayList<String> payInfo = new ArrayList<>();
+                // TODO: 직접 상품 데이터 받아서 보내야 함
+                payInfo.add("화장실 안전 손잡이 변기 안전바:1:87220");
+                payInfo.add("L자형&T자형 안전 손잡이:2:4400");
+                Intent payIntent = new Intent(mContext, PayInfoActivity.class);
+                payIntent.putStringArrayListExtra("pay_info", payInfo);
+                payIntent.putExtra("itemCode", "002");
+                startActivity(payIntent);
+            }
+        });
+
+
+
+
+}
 
 
     @Override
@@ -88,4 +119,7 @@ public class BasketActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+
 }

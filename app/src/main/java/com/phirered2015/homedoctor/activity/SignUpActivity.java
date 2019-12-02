@@ -39,8 +39,7 @@ public class SignUpActivity extends AppCompatActivity {
     final String TAG = "debuging";
     private FirebaseAuth mAuth;
     Context mContext;
-    Spinner spinnerPhone1;
-    EditText editMail, editPhone2, editPhone3, editPwd, editName, editPost, editAddress, editDetailAddress;
+    EditText editMail, editPhone1, editPhone2, editPhone3, editPwd, editName, editPost, editAddress, editDetailAddress;
     Button btnSignUp, btnSearchPost;
     ArrayAdapter arrayAdapter;
 
@@ -59,7 +58,7 @@ public class SignUpActivity extends AppCompatActivity {
         mContext = this;
 
         editMail = findViewById(R.id.edit_mail);
-        spinnerPhone1 = findViewById(R.id.spinner_phone_1);
+        editPhone1 = findViewById(R.id.edit_phone_1);
         editPhone2 = findViewById(R.id.edit_phone_2);
         editPhone3 = findViewById(R.id.edit_phone_3);
         editPwd = findViewById(R.id.edit_pwd);
@@ -69,12 +68,6 @@ public class SignUpActivity extends AppCompatActivity {
         editDetailAddress = findViewById(R.id.edit_detail_address);
         btnSignUp = findViewById(R.id.btn_sign_up);
         btnSearchPost = findViewById(R.id.btn_search_post);
-
-        // Spinner 값 추가
-        ArrayList phoneList = new ArrayList<>();
-        phoneList.addAll(Arrays.asList("010", "011", "017", "019"));
-        arrayAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, phoneList);
-        spinnerPhone1.setAdapter(arrayAdapter);
 
 
         btnSearchPost.setOnClickListener(new View.OnClickListener() {
@@ -100,6 +93,9 @@ public class SignUpActivity extends AppCompatActivity {
                                         // firebase db에 추가하는 부분
                                         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("user");
                                         mDatabase = mDatabase.child(mAuth.getUid());
+                                        mDatabase.child("phone").setValue(editPhone1.getText().toString() + "-" +
+                                                editPhone2.getText().toString() + "-" +
+                                                editPhone3.getText().toString());
                                         mDatabase.child("name").setValue(editName.getText().toString());
                                         mDatabase.child("post_num").setValue(editPost.getText().toString());
                                         mDatabase.child("address").setValue(editAddress.getText().toString());

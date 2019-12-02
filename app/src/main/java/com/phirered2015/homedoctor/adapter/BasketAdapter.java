@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,10 +19,11 @@ import java.util.ArrayList;
 public class BasketAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<DeliverStateItem> items;
+    private boolean[] isCheckedConfirm;
     public BasketAdapter(Context context, ArrayList<DeliverStateItem> items) {
         this.context = context;
         this.items = items;
-        Log.e("Adapter check", "123");
+        this.isCheckedConfirm = new boolean[items.size()];
     }
 
     @Override
@@ -52,6 +54,7 @@ public class BasketAdapter extends BaseAdapter {
         TextView title = view.findViewById(R.id.item_name);
         TextView price = view.findViewById(R.id.item_price);
         TextView quantity = view.findViewById(R.id.item_count);
+        CheckBox checkboxItem = view.findViewById(R.id.item_check);
 
         DeliverStateItem item = items.get(pos);
         title.setText(item.getName());
@@ -61,5 +64,24 @@ public class BasketAdapter extends BaseAdapter {
         price.setText(String.valueOf(item.getPrice()));
         quantity.setText(item.getState());   // 수량이지만 state를 사용
         return view;
+    }
+
+    public void setAllChecked(boolean isChecked){
+        for (int i = 0; i < items.size(); i++) {
+            isCheckedConfirm[i] = isChecked;
+        }
+    }
+
+    public void setChecked(int position){
+        isCheckedConfirm[position] = isCheckedConfirm[position];
+    }
+
+    public ArrayList<Integer> getChecked(){
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        for (int i = 0; i < isCheckedConfirm.length; i++) {
+            if(isCheckedConfirm[i])
+                arrayList.add(i);
+        }
+        return arrayList;
     }
 }

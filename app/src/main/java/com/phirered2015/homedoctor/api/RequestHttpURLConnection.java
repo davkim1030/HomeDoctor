@@ -2,6 +2,7 @@ package com.phirered2015.homedoctor.api;
 
 import android.content.ContentValues;
 import android.content.res.Resources;
+import android.util.Log;
 
 import com.phirered2015.homedoctor.R;
 
@@ -39,6 +40,7 @@ public class RequestHttpURLConnection {
             String value;
 
             for (Map.Entry<String, Object> parameter : _params.valueSet()) {
+                Log.e("keyvalue", parameter.getKey());
                 key = parameter.getKey();
                 value = parameter.getValue().toString();
 

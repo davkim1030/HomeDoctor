@@ -61,29 +61,35 @@
                 android:layout_height="wrap_content"
                 android:weightSum="3">
 
-                <TextView
+                <EditText
                     android:id="@+id/text_phone_1"
                     android:layout_weight="1"
+                    android:singleLine="true"
+                    android:imeOptions="actionNext"
                     android:layout_width="0dp"
+                    android:inputType="phone"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/txt_size_m"
-                    android:hint="010"/>
+                    android:textSize="@dimen/txt_size_m"/>
 
-                <TextView
+                <EditText
                     android:id="@+id/text_phone_2"
                     android:layout_weight="1"
+                    android:singleLine="true"
+                    android:imeOptions="actionNext"
                     android:layout_width="0dp"
+                    android:inputType="phone"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/txt_size_m"
-                    android:hint="0000"/>
+                    android:textSize="@dimen/txt_size_m"/>
 
-                <TextView
+                <EditText
                     android:id="@+id/text_phone_3"
                     android:layout_weight="1"
+                    android:singleLine="true"
+                    android:imeOptions="actionNext"
+                    android:inputType="phone"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/txt_size_m"
-                    android:hint="0000"/>
+                    android:textSize="@dimen/txt_size_m"/>
 
             </LinearLayout>
 
@@ -119,16 +125,9 @@
                     android:layout_height="wrap_content"
                     android:singleLine="true"
                     android:imeOptions="actionNext"
-                    android:editable="false"
+                    android:inputType="numberDecimal"
                     android:textSize="@dimen/txt_size_m"/>
 
-                <Button
-                    android:id="@+id/btn_search_post"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/search_kr"
-                    android:background="@color/d_gray"
-                    android:textColor="@color/white"/>
 
             </LinearLayout>
 
@@ -185,6 +184,8 @@
         </LinearLayout>
         <Button
             android:id="@+id/btn_logout"
+            android:textColor="@color/white"
+            android:background="@color/colorPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -204,6 +205,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@color/l_gray"
             android:text="@string/cancel_kr" />
 
         <Button

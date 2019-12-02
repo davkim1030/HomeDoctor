@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity{
     DatabaseReference mRef = FirebaseDatabase.getInstance().getReference();
     ArrayList<MainGridItem> items = new ArrayList<>();
     String UID;
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity{
         mContext = this;
         UID = getSharedPreferences("firebase_uid_pref", MODE_PRIVATE).getString("UID", "");
         gridView = findViewById(R.id.main_gridview);
+        progressBar = findViewById(R.id.progress_circular);
 
         /*
         mRef.child("product").addValueEventListener(new ValueEventListener(){...});
@@ -64,6 +67,7 @@ public class MainActivity extends AppCompatActivity{
                 }
                 MainGridViewAdapter adapter = new MainGridViewAdapter(mContext, items);
                 gridView.setAdapter(adapter);
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override

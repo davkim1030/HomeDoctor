@@ -76,6 +76,7 @@ public class DialogBasket {
             @Override
             public void onClick(View view) {
                 if(ctr[0] != 0){
+                    // TODO: 장바구니에 넣는 코드 추가
                     Intent intent = new Intent(mContext, BasketActivity.class);
                     intent.putExtra("toAdd", ctr[0]);
                     mContext.startActivity(intent);

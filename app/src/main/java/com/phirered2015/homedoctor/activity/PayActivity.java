@@ -11,35 +11,26 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.phirered2015.homedoctor.R;
 import com.phirered2015.homedoctor.api.RequestHttpURLConnection;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 
 public class PayActivity extends AppCompatActivity {
     final String apiBaseUrl = "https://kapi.kakao.com/v1/payment/";
     final String linkBaseUrl = "https://developers.kakao.com/";
     DatabaseReference database = FirebaseDatabase.getInstance().getReference();
-    FirebaseAuth mAuth;
     String readyUrl;
     WebView webViewPay;
     Context mContext;
-    String tid;
-    final String itemCode = "001"; //TODO: 이거 Intent 넘어오는 값으로 바꿔야 함
-    final String quantity = "1"; //TODO: 이거 Intent 넘어오는 값으로 바꿔야 함
-    String itemName, itemPrice;
-    String UID;
+    String tid, itemCode, quantity, itemName, itemPrice, UID;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,45 +38,34 @@ public class PayActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         mContext = this;
         UID = getSharedPreferences("firebase_uid_pref", MODE_PRIVATE).getString("UID", "");
+        Intent payIntent = getIntent();
+        itemCode = payIntent.getStringExtra("itemCode");
+        quantity = payIntent.getStringExtra("itemQuantity");
+        itemName = payIntent.getStringExtra("itemName");
+        itemPrice = payIntent.getStringExtra("itemPrice");
 
         // DB에서 상품 정보 가져오기
-        DatabaseReference product = database.child("product").child(itemCode);
-        product.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                // DB에서 상품 정보 가져오기
-                itemName = (String) dataSnapshot.child("name").getValue();
-                itemPrice = (String) dataSnapshot.child("price").getValue();
+        webViewPay = findViewById(R.id.webview_pay);
+        webViewPay.getSettings().setJavaScriptEnabled(true);
+        readyUrl = apiBaseUrl + getString(R.string.kakao_pay_ready_url);
 
-                webViewPay = findViewById(R.id.webview_pay);
-                webViewPay.getSettings().setJavaScriptEnabled(true);
-                readyUrl = apiBaseUrl + getString(R.string.kakao_pay_ready_url);
+        ContentValues payData = new ContentValues();
+        payData.put("cid", getString(R.string.kakao_pay_cid));
+        payData.put("partner_order_id", getString(R.string.kakao_pay_partner_order_id));
+        payData.put("partner_user_id", getString(R.string.kakao_pay_partner_user_id));
+        payData.put("item_code", itemCode);
+        payData.put("item_name", itemName);
+        payData.put("quantity", quantity);
+        payData.put("total_amount", itemPrice);
+        payData.put("vat_amount", String.valueOf(Integer.valueOf(itemPrice) / 11));     // 부가세 10%
+        payData.put("tax_free_amount", "0");
+        payData.put("approval_url", linkBaseUrl + getString(R.string.kakao_pay_approval_url));
+        payData.put("fail_url", linkBaseUrl + getString(R.string.kakao_pay_fail_url));
+        payData.put("cancel_url", linkBaseUrl + getString(R.string.kakao_pay_cancel_url));
 
-                ContentValues payData = new ContentValues();
-                // TODO: Intent로 http body 추가 필요
-                payData.put("cid", getString(R.string.kakao_pay_cid));
-                payData.put("partner_order_id", getString(R.string.kakao_pay_partner_order_id));
-                payData.put("partner_user_id", getString(R.string.kakao_pay_partner_user_id));
-                payData.put("item_code", itemCode);
-                payData.put("item_name", itemName);
-                payData.put("quantity", quantity);
-                payData.put("total_amount", itemPrice);
-                payData.put("vat_amount", String.valueOf(Integer.valueOf(itemPrice) / 11));     // 부가세 10%
-                payData.put("tax_free_amount", "0");
-                payData.put("approval_url", linkBaseUrl + getString(R.string.kakao_pay_approval_url));
-                payData.put("fail_url", linkBaseUrl + getString(R.string.kakao_pay_fail_url));
-                payData.put("cancel_url", linkBaseUrl + getString(R.string.kakao_pay_cancel_url));
-
-                // AsyncTask를 통해 HttpURLConnection 수행.
-                NetworkTask networkTask = new NetworkTask(readyUrl, payData);
-                networkTask.execute();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+        // AsyncTask를 통해 HttpURLConnection 수행.
+        NetworkTask networkTask = new NetworkTask(readyUrl, payData);
+        networkTask.execute();
 
 
     }
@@ -141,7 +121,9 @@ public class PayActivity extends AppCompatActivity {
                 database.child("thumbnail").setValue(itemCode + exec);
                 database.child("title").setValue(itemName);
                 // TODO: Intent에 extra 붙여서 결과 알려주기
-                startActivity(new Intent(mContext, PaySuccessActivity.class));
+                Intent intent = new Intent(mContext, PaySuccessActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
                 finish();
             }
 
