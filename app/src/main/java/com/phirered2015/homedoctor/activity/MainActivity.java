@@ -30,6 +30,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.phirered2015.homedoctor.R;
 import com.phirered2015.homedoctor.adapter.MainGridViewAdapter;
+import com.phirered2015.homedoctor.dialog.DialogBasket;
 import com.phirered2015.homedoctor.item.MainGridItem;
 
 import java.util.ArrayList;
@@ -82,9 +83,24 @@ public class MainActivity extends AppCompatActivity{
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:010-3387-4686"));
-                startActivity(intent);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                builder.setTitle("예약 전화하기");
+                builder.setMessage("상담 가능 시간은 09:00 ~ 17:00 까지입니다. 전화 하시겠습니까?");
+                builder.setPositiveButton("전화하기", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(Intent.ACTION_DIAL);
+                        intent.setData(Uri.parse("tel:010-3387-4686"));
+                        startActivity(intent);
+                    }
+                });
+                builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                builder.show();
             }
         });
 
