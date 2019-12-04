@@ -33,6 +33,7 @@ public class DetailActivity extends AppCompatActivity {
     DatabaseReference mRef = FirebaseDatabase.getInstance().getReference();
     String posstr;
     String prefix = "00";
+    String prefix2 = "0";
     int pos = 0;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,8 +59,12 @@ public class DetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         pos = intent.getExtras().getInt("gridpos");
         int i = pos + 1;
-        posstr = prefix + i; // 그리드뷰 위치 변수; Main activity로 부터 넘어옴; MainGridViewAdapter에 구현
-
+        if(pos < 10) {
+            posstr = prefix + i; // 그리드뷰 위치 변수; Main activity로 부터 넘어옴; MainGridViewAdapter에 구현
+        }
+        else{
+            posstr = prefix2 + i;
+        }
         /*
         mRef.child("product").child(posstr).addValueEventListener(new ValueEventListener(){...});
         파이어베이스 product/posstr(해당 그리드 위치)에서 데이터 수신 후 View로 표출
@@ -91,8 +96,7 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, BasketActivity.class);
-                intent.putExtra("gridnum", posstr);
-                DialogBasket db = new DialogBasket(mContext);
+                DialogBasket db = new DialogBasket(mContext, posstr);
                 db.callFunc();
             }
         });
