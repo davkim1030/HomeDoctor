@@ -32,6 +32,7 @@ public class DetailActivity extends AppCompatActivity {
     String UID;
     DatabaseReference mRef = FirebaseDatabase.getInstance().getReference();
     String posstr;
+    String pricestr;
     String prefix = "00";
     String prefix2 = "0";
     int pos = 0;
@@ -78,6 +79,7 @@ public class DetailActivity extends AppCompatActivity {
                 StorageReference descimg = FirebaseStorage.getInstance().getReference("desc_img/" + dataSnapshot.child("desc_images").child("0").getValue());
                 Glide.with(mContext).load(topimg).into(topImage);
                 productName.setText((String) dataSnapshot.child("name").getValue());
+                pricestr = (String) dataSnapshot.child("price").getValue();
                 productPrice.setText((String) dataSnapshot.child("price").getValue() + "원");
                 descText.setText((String) dataSnapshot.child("description").getValue());
                 Glide.with(mContext).load(descimg).into(descImage);
@@ -96,7 +98,7 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, BasketActivity.class);
-                DialogBasket db = new DialogBasket(mContext, posstr);
+                DialogBasket db = new DialogBasket(mContext, posstr, pricestr);
                 db.callFunc();
             }
         });

@@ -22,7 +22,8 @@ import java.util.ArrayList;
 public class MainGridViewAdapter extends BaseAdapter {
     Context mContext;
     ArrayList<MainGridItem> items;
-
+    String prefix = "00";
+    String prefix2 = "0";
 
     public MainGridViewAdapter(Context context, ArrayList<MainGridItem> items){
         mContext = context;
@@ -47,6 +48,14 @@ public class MainGridViewAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View view, ViewGroup viewGroup) {
         final int i = position;
+        final String posstr;
+
+        if(position < 10) {
+            posstr = prefix + i; // 그리드뷰 위치 변수; Main activity로 부터 넘어옴; MainGridViewAdapter에 구현
+        }
+        else{
+            posstr = prefix2 + i;
+        }
 
         if(view == null){
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -74,13 +83,14 @@ public class MainGridViewAdapter extends BaseAdapter {
 
         MainGridItem item = items.get(i);
         String pricestr = item.getPrice() + "원";
+        final String priceset = item.getPrice();
         Glide.with(mContext).load(item.getImg()).into(gridImg);
         name.setText(item.getName());
         price.setText(pricestr);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogBasket db = new DialogBasket(mContext);
+                DialogBasket db = new DialogBasket(mContext, posstr, priceset);
                 db.callFunc();
             }
         });
