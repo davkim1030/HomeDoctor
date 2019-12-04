@@ -69,18 +69,21 @@ public class BasketActivity extends AppCompatActivity {
         mRef.child("user").child(UID).child("basket").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                items.clear();
-                for(DataSnapshot i: dataSnapshot.getChildren()){
-                    String exec = Integer.valueOf(i.getKey()) <= 20 || Integer.valueOf(i.getKey()) > 40 ? ".jpg" : ".PNG";
-                    StorageReference storageReference = FirebaseStorage.getInstance().getReference("thumbnail/" + i.getKey() + exec);
-                    items.add(new DeliverStateItem(i.getKey(),
-                            i.getValue().toString(),
-                            100, storageReference)
-                    );
+                if(dataSnapshot.hasChildren()){
+                    items.clear();
+                    for(DataSnapshot i: dataSnapshot.getChildren()){
+                        String exec = Integer.valueOf(i.getKey()) <= 20 || Integer.valueOf(i.getKey()) > 40 ? ".jpg" : ".PNG";
+                        StorageReference storageReference = FirebaseStorage.getInstance().getReference("thumbnail/" + i.getKey() + exec);
+                        items.add(new DeliverStateItem(i.getKey(),
+                                i.child("quantity").getValue().toString(),
+                                Integer.valueOf(i.child("price").getValue().toString())
+                                , storageReference)
+                        );
+                    }
+                    BasketAdapter adapter = new BasketAdapter(mContext, items);
+                    listView.setAdapter(adapter);
+                    progressBar.setVisibility(View.GONE);
                 }
-                BasketAdapter adapter = new BasketAdapter(mContext, items);
-                listView.setAdapter(adapter);
-                progressBar.setVisibility(View.GONE);
             }
 
             @Override
@@ -93,13 +96,10 @@ public class BasketActivity extends AppCompatActivity {
         btnPurchase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ArrayList<String> payInfo = new ArrayList<>();
-                // TODO: 직접 상품 데이터 받아서 보내야 함
-                payInfo.add("화장실 안전 손잡이 변기 안전바:1:87220");
-                payInfo.add("L자형&T자형 안전 손잡이:2:4400");
                 Intent payIntent = new Intent(mContext, PayInfoActivity.class);
-                payIntent.putStringArrayListExtra("pay_info", payInfo);
-                payIntent.putExtra("itemCode", "002");
+                Bundle bundle= new Bundle();
+                bundle.putSerializable("info", items);
+                payIntent.putExtra("itemInfo", bundle);
                 startActivity(payIntent);
             }
         });

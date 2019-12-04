@@ -226,7 +226,7 @@
                 android:layout_weight="7"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:imeOptions="actionNext"
+                android:imeOptions="actionDone"
                 android:textSize="@dimen/txt_size_m"/>
         </LinearLayout>
     </LinearLayout>
