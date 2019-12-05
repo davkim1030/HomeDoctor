@@ -54,65 +54,68 @@ public class SignUpActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
 
-        mAuth = FirebaseAuth.getInstance();
-        mContext = this;
+        if (savedInstanceState == null) {
+            mAuth = FirebaseAuth.getInstance();
+            mContext = this;
 
-        editMail = findViewById(R.id.edit_mail);
-        editPhone1 = findViewById(R.id.edit_phone_1);
-        editPhone2 = findViewById(R.id.edit_phone_2);
-        editPhone3 = findViewById(R.id.edit_phone_3);
-        editPwd = findViewById(R.id.edit_pwd);
-        editName = findViewById(R.id.edit_name);
-        editPost = findViewById(R.id.edit_post_num);
-        editAddress = findViewById(R.id.edit_address);
-        editDetailAddress = findViewById(R.id.edit_detail_address);
-        btnSignUp = findViewById(R.id.btn_sign_up);
-        btnSearchPost = findViewById(R.id.btn_search_post);
+            editMail = findViewById(R.id.edit_mail);
+            editPhone1 = findViewById(R.id.edit_phone_1);
+            editPhone2 = findViewById(R.id.edit_phone_2);
+            editPhone3 = findViewById(R.id.edit_phone_3);
+            editPwd = findViewById(R.id.edit_pwd);
+            editName = findViewById(R.id.edit_name);
+            editPost = findViewById(R.id.edit_post_num);
+            editAddress = findViewById(R.id.edit_address);
+            editDetailAddress = findViewById(R.id.edit_detail_address);
+            btnSignUp = findViewById(R.id.btn_sign_up);
+            btnSearchPost = findViewById(R.id.btn_search_post);
 
 
-        btnSearchPost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                init_webView();
-                handler = new Handler();
-            }
-        });
-
-        btnSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(isValid()){
-                    final String email = editMail.getText().toString();
-                    mAuth.createUserWithEmailAndPassword(email, editPwd.getText().toString())
-                            .addOnCompleteListener((Activity) mContext, new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (task.isSuccessful()) {
-                                        // Sign in success, update UI with the signed-in user's information
-                                        Log.d(TAG, "createUserWithEmail:success");
-                                        // firebase db에 추가하는 부분
-                                        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("user");
-                                        mDatabase = mDatabase.child(mAuth.getUid());
-                                        mDatabase.child("phone").setValue(editPhone1.getText().toString() + "-" +
-                                                editPhone2.getText().toString() + "-" +
-                                                editPhone3.getText().toString());
-                                        mDatabase.child("name").setValue(editName.getText().toString());
-                                        mDatabase.child("post_num").setValue(editPost.getText().toString());
-                                        mDatabase.child("address").setValue(editAddress.getText().toString());
-                                        mDatabase.child("detail_address").setValue(editDetailAddress.getText().toString());
-                                    } else {
-                                        // If sign in fails, display a message to the user.
-                                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                        Toast.makeText(mContext, "Authentication failed.",
-                                                Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            });
+            btnSearchPost.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    init_webView();
+                    handler = new Handler();
                 }
+            });
 
-                finish();
-            }
-        });
+            btnSignUp.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(isValid()){
+                        final String email = editMail.getText().toString();
+                        mAuth.createUserWithEmailAndPassword(email, editPwd.getText().toString())
+                                .addOnCompleteListener((Activity) mContext, new OnCompleteListener<AuthResult>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                        if (task.isSuccessful()) {
+                                            // Sign in success, update UI with the signed-in user's information
+                                            Log.d(TAG, "createUserWithEmail:success");
+                                            // firebase db에 추가하는 부분
+                                            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("user");
+                                            mDatabase = mDatabase.child(mAuth.getUid());
+                                            mDatabase.child("phone").setValue(editPhone1.getText().toString() + "-" +
+                                                    editPhone2.getText().toString() + "-" +
+                                                    editPhone3.getText().toString());
+                                            mDatabase.child("name").setValue(editName.getText().toString());
+                                            mDatabase.child("post_num").setValue(editPost.getText().toString());
+                                            mDatabase.child("address").setValue(editAddress.getText().toString());
+                                            mDatabase.child("detail_address").setValue(editDetailAddress.getText().toString());
+                                            finish();
+                                        } else {
+                                            // If sign in fails, display a message to the us    er.
+                                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                            Toast.makeText(mContext, "Authentication failed.",
+                                                    Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+                    }
+
+                }
+            });
+        }
+
     }
 
     public void init_webView() {
@@ -168,7 +171,8 @@ public class SignUpActivity extends AppCompatActivity {
            !editAddress.getText().toString().isEmpty() &&
            !editDetailAddress.getText().toString().isEmpty()){
             return editMail.getText().toString().contains("@") &&
-                    editMail.getText().toString().contains(".");
+                    editMail.getText().toString().contains(".") &&
+                    editPwd.getText().toString().length() < 6;
         } else
             return false;
     }
