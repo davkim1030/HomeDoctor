@@ -110,6 +110,8 @@ public class SignUpActivity extends AppCompatActivity {
                                         }
                                     }
                                 });
+                    } else {
+                        Toast.makeText(mContext, "이메일 형식과 비밀번호 길이(최소 6자리)를 확인해주세요", Toast.LENGTH_SHORT).show();
                     }
 
                 }
