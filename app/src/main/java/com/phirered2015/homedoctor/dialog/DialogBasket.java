@@ -100,8 +100,9 @@ public class DialogBasket {
                     Log.e("key", mRef.child("user").child(UID).child("basket").child(itemcode).getKey());
                     mRef.child("user").child(UID).child("basket").child(itemcode).child("quantity").setValue(String.valueOf(ctr[0]));
                     mRef.child("user").child(UID).child("basket").child(itemcode).child("price").setValue(pricestr);
-                    Intent intent = new Intent(mContext, BasketActivity.class);
-                    mContext.startActivity(intent);
+//                    Intent intent = new Intent(mContext, BasketActivity.class);
+//                    mContext.startActivity(intent);
+                    Toast.makeText(mContext, "추가되었습니다.", Toast.LENGTH_SHORT).show();
                     dlg.dismiss();
                 }
             }
