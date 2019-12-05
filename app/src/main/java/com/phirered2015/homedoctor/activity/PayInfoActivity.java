@@ -43,7 +43,7 @@ public class PayInfoActivity extends AppCompatActivity {
             R.drawable.chair,
             R.drawable.desk
     };
-    String UID, itemCode;
+    String UID, itemCode, itemPrice;
     int totalAmount = 0, totalCount = 0;
     EditText editName, editPhone1, editPhone2, editPhone3, editPost, editAddress, editDetailAddress;
     TextView txtTotalPrice;
@@ -61,9 +61,10 @@ public class PayInfoActivity extends AppCompatActivity {
         UID = getSharedPreferences("firebase_uid_pref", MODE_PRIVATE).getString("UID", "");
         CustomList adapter = new CustomList(PayInfoActivity.this);
         final Intent intent = getIntent();
+        payInfo = intent.getStringArrayListExtra("nameList");
         // TODO: 바로 구매하기 버튼 눌렀을 시, intent 받는 부분 필요
-        payInfo = intent.getStringArrayListExtra("pay_info");
         itemCode = intent.getStringExtra("itemCode");
+        itemPrice = intent.getStringExtra("itemPrice");
         list= findViewById(R.id.shopping_list);
         list.setAdapter(adapter);
 
@@ -110,9 +111,9 @@ public class PayInfoActivity extends AppCompatActivity {
                     payIntent.putExtra("itemQuantity", String.valueOf(totalCount));
                     payIntent.putExtra("itemPrice", String.valueOf(totalAmount));
                     if(payInfo.size() != 1)
-                        payIntent.putExtra("itemName", payInfo.get(0).split(":")[0] + "외 " + (payInfo.size() - 1) + "개 상품");
+                        payIntent.putExtra("itemName", payInfo.get(0) + "외 " + (payInfo.size() - 1) + "개 상품");
                     else
-                        payIntent.putExtra("itemName", payInfo.get(0).split(":")[0]);
+                        payIntent.putExtra("itemName", payInfo.get(0));
                     startActivity(payIntent);
                 } else {
                     Toast.makeText(PayInfoActivity.this, "모든 데이터를 다 입력해주세요.", Toast.LENGTH_SHORT).show();

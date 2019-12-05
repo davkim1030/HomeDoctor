@@ -34,6 +34,7 @@ import com.phirered2015.homedoctor.R;
 import com.phirered2015.homedoctor.adapter.BasketAdapter;
 import com.phirered2015.homedoctor.item.DeliverStateItem;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class BasketActivity extends AppCompatActivity {
@@ -51,7 +52,7 @@ public class BasketActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_basket);
         mContext = this;
-        ActionBar actionBar = getSupportActionBar();
+        final ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
         UID = getSharedPreferences("firebase_uid_pref", MODE_PRIVATE).getString("UID", "");
@@ -72,8 +73,7 @@ public class BasketActivity extends AppCompatActivity {
                 if(dataSnapshot.hasChildren()){
                     items.clear();
                     for(DataSnapshot i: dataSnapshot.getChildren()){
-                        String exec = Integer.valueOf(i.getKey()) <= 20 || Integer.valueOf(i.getKey()) > 40 ? ".jpg" : ".PNG";
-                        StorageReference storageReference = FirebaseStorage.getInstance().getReference("thumbnail/" + i.getKey() + exec);
+                        StorageReference storageReference = FirebaseStorage.getInstance().getReference("thumbnail/" + i.getKey() + ".jpg");
                         items.add(new DeliverStateItem(i.getKey(),
                                 i.child("quantity").getValue().toString(),
                                 Integer.valueOf(i.child("price").getValue().toString())
@@ -97,9 +97,11 @@ public class BasketActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent payIntent = new Intent(mContext, PayInfoActivity.class);
-                Bundle bundle= new Bundle();
-                bundle.putSerializable("info", items);
-                payIntent.putExtra("itemInfo", bundle);
+                ArrayList<String> arrayList = new ArrayList<>();
+                for (DeliverStateItem i: items) {
+                    arrayList.add(i.getName());
+                }
+                payIntent.putExtra("nameList", arrayList);
                 startActivity(payIntent);
             }
         });

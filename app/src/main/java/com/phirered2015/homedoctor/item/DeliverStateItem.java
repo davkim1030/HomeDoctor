@@ -4,11 +4,12 @@ import android.net.Uri;
 
 import com.google.firebase.storage.StorageReference;
 
-public class DeliverStateItem {
+import java.io.Serializable;
+
+public class DeliverStateItem{
     private String name, state;
     private int price;
     StorageReference img;
-
     public DeliverStateItem(String name, String state, int price, StorageReference img){
         this.name = name;
         this.state = state;

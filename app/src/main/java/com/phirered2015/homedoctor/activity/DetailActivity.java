@@ -110,7 +110,8 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, PayInfoActivity.class);
-                intent.putExtra("gridnum", posstr);
+                intent.putExtra("itemCode", posstr);
+                intent.putExtra("itemPrice", pricestr);
                 DialogPurchase dp = new DialogPurchase(mContext);
                 dp.callFunc();
             }
