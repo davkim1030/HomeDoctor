@@ -98,6 +98,8 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, BasketActivity.class);
+                Log.e("data", posstr);
+                Log.e("price", pricestr);
                 DialogBasket db = new DialogBasket(mContext, posstr, pricestr);
                 db.callFunc();
             }
