@@ -49,12 +49,13 @@ public class MainGridViewAdapter extends BaseAdapter {
     public View getView(final int position, View view, ViewGroup viewGroup) {
         final int i = position;
         final String posstr;
+        int pos = i + 1;
 
-        if(position < 10) {
-            posstr = prefix + i; // 그리드뷰 위치 변수; Main activity로 부터 넘어옴; MainGridViewAdapter에 구현
+        if(pos < 10) {
+            posstr = prefix + pos; // 그리드뷰 위치 변수; Main activity로 부터 넘어옴; MainGridViewAdapter에 구현
         }
         else{
-            posstr = prefix2 + i;
+            posstr = prefix2 + pos;
         }
 
         if(view == null){
@@ -97,4 +98,5 @@ public class MainGridViewAdapter extends BaseAdapter {
 
         return view;
     }
+
 }
