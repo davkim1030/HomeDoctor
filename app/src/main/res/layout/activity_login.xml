@@ -27,6 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/email_kr"
+                android:fontFamily="@font/notosanskr_regular"
                 android:imeOptions="actionNext"
                 android:inputType="textEmailAddress"
                 />
@@ -36,6 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/pwd_kr"
+                android:fontFamily="@font/notosanskr_regular"
                 android:inputType="textPassword"
                 />
 
@@ -53,6 +55,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:text="@string/sign_up_kr"
+                android:fontFamily="@font/notosanskr_regular"
                 android:onClick="onClick"
                 />
 
@@ -62,6 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:text="@string/login_kr"
+                android:fontFamily="@font/notosanskr_regular"
                 android:textColor="@color/white"
                 android:backgroundTint="@color/colorPrimary"
                 android:onClick="onClick"
@@ -80,6 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/notosanskr_regular"
                 android:text="@string/save_id_kr"
                 android:onClick="onCheckboxClicked"
                 />
