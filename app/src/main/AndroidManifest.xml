@@ -32,6 +32,7 @@
         <activity android:name=".activity.PayInfoActivity" android:label="@string/pay_info_kr"/>
         <activity android:name=".activity.PaySuccessActivity" android:label="@string/pay_success_kr"/>
         <activity android:name=".activity.PayActivity"/>
+        <activity android:name=".activity.ReservationActivity" android:label="@string/reservation"/>
 
     </application>
 

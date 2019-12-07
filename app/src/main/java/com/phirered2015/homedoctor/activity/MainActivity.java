@@ -146,6 +146,8 @@ public class MainActivity extends AppCompatActivity{
                 break;
             case R.id.menu_booking:
                 //TODO: 예약확인 엑티비티 연결
+                Intent reservationintent = new Intent(mContext, ReservationActivity.class);
+                startActivity(reservationintent);
                 break;
         }
         return super.onOptionsItemSelected(item);
