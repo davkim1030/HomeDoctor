@@ -7,13 +7,22 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:actionOverflowButtonStyle">@style/MyActionBtn</item>
+        <item name="android:fontFamily">@font/notosans_regular</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-
+    <style name="TextViewFont" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/notosanskr_regular</item>
+    </style>
+    <style name="ButtonFont" parent="android:Widget.Button">
+        <item name="android:fontFamily">@font/notosanskr_regular</item>
+    </style>
+    <style name="DialogFont" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:fontFamily">@font/notosanskr_regular</item>
+    </style>
     <style name="MyActionBtn" parent="android:style/Widget.Holo.ActionButton.Overflow">
         <item name="android:src">@drawable/ic_menu_overflow_btn5</item>
     </style>

@@ -26,9 +26,9 @@
                 android:id="@+id/productName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
                 android:text="@string/product_name_kr"
-                android:textSize="15pt"
+                android:textSize="16pt"
+                android:padding="10dp"
                 android:textColor="#000000"
                 />
 
@@ -37,9 +37,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
-                android:paddingRight="10dp"
-                android:textSize="10pt"
-                android:textColor="#000000"
+                android:textSize="12pt"
+                android:padding="10dp"
+                android:textColor="@color/colorPrimary"
                 />
 
             <TextView
@@ -47,6 +47,9 @@
                 android:layout_height="wrap_content"
                 android:text="상세설명"
                 android:textSize="8pt"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp"
                 android:textColor="#000000"
                 />
 
@@ -54,7 +57,11 @@
                 android:id="@+id/descText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="10dp"
+                android:textColor="#000"
                 android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="10dp"
                 />
 
             <ImageView

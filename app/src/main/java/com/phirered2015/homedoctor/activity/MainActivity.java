@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity{
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Intent intent = new Intent(Intent.ACTION_DIAL);
-                        intent.setData(Uri.parse("tel:010-3387-4686"));
+                        intent.setData(Uri.parse("tel:010-0000-0000"));
                         startActivity(intent);
                     }
                 });

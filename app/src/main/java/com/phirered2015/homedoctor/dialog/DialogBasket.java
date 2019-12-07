@@ -96,7 +96,6 @@ public class DialogBasket {
             @Override
             public void onClick(View view) {
                 if(ctr[0] != 0) {
-                    // TODO: 장바구니에 넣는 코드 추가
                     Log.e("key", mRef.child("user").child(UID).child("basket").child(itemcode).getKey());
                     mRef.child("user").child(UID).child("basket").child(itemcode).child("quantity").setValue(String.valueOf(ctr[0]));
                     mRef.child("user").child(UID).child("basket").child(itemcode).child("price").setValue(pricestr);

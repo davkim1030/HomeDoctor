@@ -1,43 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:orientation="vertical" android:layout_width="205dp"
+    android:layout_height="320dp"
+    android:background="@color/white">
 
     <ImageView
+        android:padding="15dp"
         android:id="@+id/img_gridview"
         android:layout_width="205dp"
         android:layout_height="205dp"
+        android:layout_gravity="center"
         android:src="@drawable/chair"/>
 
-<LinearLayout
-    android:layout_width="205dp"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    >
-
     <TextView
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:id="@+id/name_gridview"
-        android:layout_width="150dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="상품명"
         android:maxLines="1"
+        android:fontFamily="@font/notosanskr_regular"
         android:ellipsize="end"
-        android:textSize="17sp"/>
-    <Button
-        android:id="@+id/btn_gridview"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        />
+        android:textSize="18sp"/>
 
-</LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginLeft="10dp">
 
     <TextView
         android:id="@+id/price_gridview"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="end"
         android:text="10000원"
+        android:gravity="start"
+        android:textColor="@color/colorPrimary"
+        android:fontFamily="@font/notosanskr_regular"
         android:textSize="20sp"/>
+
+    <Button
+        android:id="@+id/btn_gridview"
+        android:layout_width="55dp"
+        android:layout_height="wrap_content"
+        />
+
+</LinearLayout>
 
 
 </LinearLayout>
