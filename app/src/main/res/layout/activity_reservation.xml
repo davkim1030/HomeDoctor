@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:textSize="30dp"
             android:textAlignment="textEnd"
-            android:hint="YYYY.MM.DD"
+            android:hint="예약된 날짜가 없습니다"
             android:id="@+id/reservation_date"/>
 
     </LinearLayout>
@@ -40,7 +40,6 @@
             android:layout_height="wrap_content"
             android:textSize="30dp"
             android:textAlignment="textEnd"
-            android:hint="00:00"
             android:id="@+id/reservation_time"/>
 
     </LinearLayout>
@@ -61,7 +60,6 @@
             android:layout_height="wrap_content"
             android:textSize="30dp"
             android:textAlignment="textEnd"
-            android:hint="홍길동"
             android:id="@+id/reservation_name"/>
 
     </LinearLayout>
@@ -82,7 +80,6 @@
             android:layout_height="wrap_content"
             android:textSize="30dp"
             android:textAlignment="textEnd"
-            android:hint="010-1234-5678"
             android:id="@+id/reservation_phone"/>
 
     </LinearLayout>
