@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,8 +48,8 @@ public class DialogBasket {
         dlg.show();
 
 
-        final Button decrease = dlg.findViewById(R.id.decrease_btn2);
-        final Button increase = dlg.findViewById(R.id.increase_btn2);
+        final ImageButton decrease = dlg.findViewById(R.id.decrease_btn2);
+        final ImageButton increase = dlg.findViewById(R.id.increase_btn2);
         final TextView count = dlg.findViewById(R.id.count_text2);
         final Button cancel = dlg.findViewById(R.id.cancel_btn2);
         final Button adder = dlg.findViewById(R.id.add_btn);

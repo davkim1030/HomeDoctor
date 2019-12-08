@@ -11,7 +11,8 @@
         android:id="@+id/img_logo"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:src="@drawable/ic_launcher_foreground"/>
+        android:padding="20dp"
+        android:src="@drawable/ic_homedoctor"/>
     <TextView
         android:text="@string/app_name"
         android:textColor="@color/white"

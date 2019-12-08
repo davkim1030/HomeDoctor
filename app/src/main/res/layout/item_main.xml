@@ -36,14 +36,17 @@
         android:layout_height="wrap_content"
         android:text="10000원"
         android:gravity="start"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorAccent"
         android:fontFamily="@font/notosanskr_regular"
         android:textSize="20sp"/>
 
-    <Button
+    <ImageButton
         android:id="@+id/btn_gridview"
-        android:layout_width="55dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/transparent"
+        android:src="@drawable/ic_main_basket_24dp"
+        android:layout_marginLeft="30dp"
         />
 
 </LinearLayout>

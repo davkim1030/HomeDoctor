@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -81,7 +82,7 @@ public class MainGridViewAdapter extends BaseAdapter {
         ImageView gridImg = view.findViewById(R.id.img_gridview);
         TextView name = view.findViewById(R.id.name_gridview);
         final TextView price = view.findViewById(R.id.price_gridview);
-        Button btn = view.findViewById(R.id.btn_gridview);
+        ImageButton btn = view.findViewById(R.id.btn_gridview);
 
         MainGridItem item = items.get(i);
         String pricestr = item.getPrice() + "원";

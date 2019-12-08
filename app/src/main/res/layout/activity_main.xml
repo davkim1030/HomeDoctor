@@ -33,7 +33,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:clickable="true"
-        app:srcCompat="@android:drawable/ic_dialog_dialer" />
+        app:srcCompat="@drawable/ic_fab_call_24dp" />
 
     <ProgressBar
         android:id="@+id/progress_circular"

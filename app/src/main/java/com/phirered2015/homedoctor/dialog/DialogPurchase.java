@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,8 +30,8 @@ public class DialogPurchase {
         dlg.setContentView(R.layout.dialog_purchase);
         dlg.show();
 
-        final Button decrease = dlg.findViewById(R.id.decrease_btn);
-        final Button increase = dlg.findViewById(R.id.increase_btn);
+        final ImageButton decrease = dlg.findViewById(R.id.decrease_btn);
+        final ImageButton increase = dlg.findViewById(R.id.increase_btn);
         final TextView count = dlg.findViewById(R.id.count_text);
         final Button cancel = dlg.findViewById(R.id.cancel_btn);
         final Button purchase = dlg.findViewById(R.id.purchase_btn);

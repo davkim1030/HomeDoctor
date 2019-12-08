@@ -43,7 +43,7 @@ public class DetailActivity extends AppCompatActivity {
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
-        actionBar.setTitle("");
+
         mContext = this;
         UID = getSharedPreferences("firebase_uid_pref", MODE_PRIVATE).getString("UID", "");
 
@@ -79,6 +79,7 @@ public class DetailActivity extends AppCompatActivity {
                 StorageReference descimg = FirebaseStorage.getInstance().getReference("desc_img/" + dataSnapshot.child("desc_images").child("0").getValue());
                 Glide.with(mContext).load(topimg).into(topImage);
                 productName.setText((String) dataSnapshot.child("name").getValue());
+                actionBar.setTitle((String) dataSnapshot.child("name").getValue());
                 pricestr = (String) dataSnapshot.child("price").getValue();
                 productPrice.setText((String) dataSnapshot.child("price").getValue() + "원");
                 descText.setText((String) dataSnapshot.child("description").getValue());

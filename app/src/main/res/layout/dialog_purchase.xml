@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical" android:layout_width="300dp"
     android:layout_height="match_parent">
     <TextView
         android:layout_width="match_parent"
@@ -16,32 +16,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="4"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp">
-        <Button
+        android:gravity="center"
+        >
+        <ImageButton
             android:id="@+id/decrease_btn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="-"
-            android:textSize="20dp"/>
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:src="@drawable/ic_dialog_down_24dp"/>
+
         <TextView
             android:id="@+id/count_text"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:textAlignment="center"
+            android:text="1"
             android:textSize="20dp"
             android:fontFamily="@font/notosanskr_regular"
             android:textColor="#000000"
-            android:layout_weight="2"/>
-        <Button
+            />
+
+        <ImageButton
             android:id="@+id/increase_btn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="+"
-            android:textSize="20dp"/>
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:src="@drawable/ic_dialog_up_24dp"
+            />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"

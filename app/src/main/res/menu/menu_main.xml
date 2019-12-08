@@ -6,13 +6,14 @@
     <item
         android:id="@+id/menu_logout"
         android:title="@string/logout_kr"
+        android:icon="@drawable/ic_main_logout_24dp"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/menu_mypage"
         android:title="마이 페이지"
         app:showAsAction="always"
-        android:icon="@drawable/ic_launcher_foreground"
+        android:icon="@drawable/ic_main_mypage_24dp"
         />
     <item
         android:id="@+id/menu_basket"

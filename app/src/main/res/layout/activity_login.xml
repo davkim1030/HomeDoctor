@@ -14,7 +14,8 @@
             android:id="@+id/loginImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_launcher_background"
+            android:src="@drawable/ic_homedoctor_negative"
+            android:layout_marginBottom="20dp"
             />
         <!--Login input layout-->
         <LinearLayout
