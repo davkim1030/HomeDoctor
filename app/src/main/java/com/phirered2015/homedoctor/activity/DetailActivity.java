@@ -113,7 +113,7 @@ public class DetailActivity extends AppCompatActivity {
                 Intent intent = new Intent(mContext, PayInfoActivity.class);
                 intent.putExtra("itemCode", posstr);
                 intent.putExtra("itemPrice", pricestr);
-                DialogPurchase dp = new DialogPurchase(mContext);
+                DialogPurchase dp = new DialogPurchase(mContext, posstr);
                 dp.callFunc();
             }
         });

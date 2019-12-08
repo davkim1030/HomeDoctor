@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -15,11 +14,15 @@ import android.widget.Toast;
 import com.phirered2015.homedoctor.R;
 import com.phirered2015.homedoctor.activity.PayInfoActivity;
 
+import java.util.ArrayList;
+
 public class DialogPurchase {
     Context mContext;
+    String itemCode;
 
-    public DialogPurchase(Context context){
+    public DialogPurchase(Context context, String itemCode){
         this.mContext = context;
+        this.itemCode = itemCode;
     }
 
     //다이얼로그 호출 함수
@@ -84,6 +87,12 @@ public class DialogPurchase {
                 if(ctr[0] != 0){
                     Intent intent = new Intent(mContext, PayInfoActivity.class);
                     intent.putExtra("toBuy", ctr[0]);
+                    ArrayList<String> nameList = new ArrayList<>();
+                    ArrayList<String> quantityList = new ArrayList<>();
+                    nameList.add(itemCode);
+                    quantityList.add(String.valueOf(ctr[0]));
+                    intent.putExtra("nameList", nameList);
+                    intent.putExtra("quantityList", quantityList);
                     mContext.startActivity(intent);
                     ctr[0] = 0;
                     dlg.dismiss();
