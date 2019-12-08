@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.TestActivity">
+        <activity android:name=".activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +25,6 @@
         <activity android:name=".activity.TutorialActivity"/>
         <activity android:name=".activity.LoginActivity"/>
         <activity android:name=".activity.DeliverStatusActivity" android:label="@string/deliver_state_kr"/>
-        <activity android:name=".activity.SplashActivity"/>
         <activity android:name=".activity.DetailActivity" android:label="Home Doctor"/>
         <activity android:name=".activity.BasketActivity" android:label="@string/basket_kr"/>
         <activity android:name=".activity.MyPageActivity" android:label="@string/my_page_kr"/>

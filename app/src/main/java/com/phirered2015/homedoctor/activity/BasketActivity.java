@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
@@ -83,6 +84,10 @@ public class BasketActivity extends AppCompatActivity {
                     BasketAdapter adapter = new BasketAdapter(mContext, items);
                     listView.setAdapter(adapter);
                     progressBar.setVisibility(View.GONE);
+                } else {
+                    Toast.makeText(mContext, "장바구니가 비어있습니다.", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
+                    btnPurchase.setEnabled(false);
                 }
             }
 
@@ -98,10 +103,13 @@ public class BasketActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent payIntent = new Intent(mContext, PayInfoActivity.class);
                 ArrayList<String> arrayList = new ArrayList<>();
+                ArrayList<String> quantityList= new ArrayList<>();
                 for (DeliverStateItem i: items) {
                     arrayList.add(i.getName());
+                    quantityList.add(i.getState());
                 }
                 payIntent.putExtra("nameList", arrayList);
+                payIntent.putExtra("quantityList", quantityList);
                 startActivity(payIntent);
             }
         });

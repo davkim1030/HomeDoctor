@@ -3,6 +3,7 @@ package com.phirered2015.homedoctor.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +24,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,17 +41,15 @@ import java.util.ArrayList;
 public class PayInfoActivity extends AppCompatActivity {
     ListView list;
     Context mContext;
-    Integer[] images = {
-            R.drawable.chair,
-            R.drawable.desk
-    };
-    String UID, itemCode, itemPrice;
+    String UID, itemCode;
     int totalAmount = 0, totalCount = 0;
     EditText editName, editPhone1, editPhone2, editPhone3, editPost, editAddress, editDetailAddress;
     TextView txtTotalPrice;
     Button btnPurchase;
-    ArrayList<String> payInfo;
+    ArrayList<String> payInfo, quantityList;
     DatabaseReference mRef = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference mRef2 = FirebaseDatabase.getInstance().getReference();
+    static int vCnt = 0, cCnt = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,9 +62,9 @@ public class PayInfoActivity extends AppCompatActivity {
         CustomList adapter = new CustomList(PayInfoActivity.this);
         final Intent intent = getIntent();
         payInfo = intent.getStringArrayListExtra("nameList");
+        quantityList = intent.getStringArrayListExtra("quantityList");
         // TODO: 바로 구매하기 버튼 눌렀을 시, intent 받는 부분 필요
-        itemCode = intent.getStringExtra("itemCode");
-        itemPrice = intent.getStringExtra("itemPrice");
+        itemCode = payInfo.get(0);
         list= findViewById(R.id.shopping_list);
         list.setAdapter(adapter);
 
@@ -135,7 +135,7 @@ public class PayInfoActivity extends AppCompatActivity {
         }
 
         @Override
-        public View getView(int position, View view, ViewGroup parent) {
+        public View getView(int position, View view, final ViewGroup parent) {
             final int pos = position;
 
             // "listview_item" Layout을 inflate하여 convertView 참조 획득.
@@ -143,21 +143,44 @@ public class PayInfoActivity extends AppCompatActivity {
                 LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 view = inflater.inflate(R.layout.item_list_read_only, parent, false);
             }
-            ImageView imageView = view.findViewById(R.id.image);
-            TextView title = view.findViewById(R.id.item_name);
-            TextView price = view.findViewById(R.id.item_price);
-            TextView quantity = view.findViewById(R.id.item_count);
+            final ImageView imageView = view.findViewById(R.id.image);
+            final TextView title = view.findViewById(R.id.item_name);
+            final TextView price = view.findViewById(R.id.item_price);
+            final TextView quantity = view.findViewById(R.id.item_count);
 
-            String[] detail = payInfo.get(pos).split(":");
-            totalAmount += Integer.valueOf(detail[2]); // intent 넘겨주기 위한 총 가격
-            totalCount += Integer.valueOf(detail[1]);
-            txtTotalPrice.setText("" + String.valueOf(totalAmount));
-            Log.e("totalAmount", String.valueOf(totalAmount));
-            title.setText(detail[0]);
-            quantity.setText(detail[1]);
-            // TODO: 이미지 넘겨받는거 구상
-            imageView.setImageResource(images[position]);
-            price.setText(detail[2]);
+            final String[] strTitle = new String[1];
+
+            mRef2.child("product").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if(vCnt < payInfo.size()){
+                        totalAmount += Integer.valueOf(dataSnapshot.child(payInfo.get(pos)).child("price").getValue().toString());
+                        vCnt++;
+                    }
+                    txtTotalPrice.setText("" + totalAmount);
+                    strTitle[0] = dataSnapshot.child(payInfo.get(pos)).child("name").getValue().toString();
+                    StorageReference storageReference = FirebaseStorage.getInstance().getReference("thumbnail/" +
+                            dataSnapshot.child(payInfo.get(pos)).child("thumbnail").getValue().toString());
+
+                    Glide.with(mContext)
+                            .load(storageReference)
+                            .into(imageView);
+                    title.setText(strTitle[0]);
+                    quantity.setText(quantityList.get(pos));
+                    price.setText(dataSnapshot.child(payInfo.get(pos)).child("price").getValue().toString());
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+            if(cCnt < payInfo.size()){
+                totalCount += Integer.valueOf(quantityList.get(pos));
+                cCnt++;
+            }
+
             return view;
         }
     }

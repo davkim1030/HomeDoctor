@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -44,6 +45,10 @@ public class PayActivity extends AppCompatActivity {
         itemName = payIntent.getStringExtra("itemName");
         itemPrice = payIntent.getStringExtra("itemPrice");
 
+        Log.e("itemCode", itemCode);
+        Log.e("quantity", quantity);
+        Log.e("itemName", itemName);
+        Log.e("itemPrice", itemPrice);
         // DB에서 상품 정보 가져오기
         webViewPay = findViewById(R.id.webview_pay);
         webViewPay.getSettings().setJavaScriptEnabled(true);
@@ -113,16 +118,18 @@ public class PayActivity extends AppCompatActivity {
             }
             // approve api의 경우
             else if(s.contains("aid")){
-                String exec = Integer.valueOf(itemCode) > 20 && Integer.valueOf(itemCode) <= 40? ".PNG" : ".jpg";
                 database = database.child("user").child(UID).child("purchased").child(tid);
                 database.child(itemCode).setValue(quantity);
                 database.child("status").setValue("결제 완료");
                 database.child("amount").setValue(itemPrice);
-                database.child("thumbnail").setValue(itemCode + exec);
+                database.child("thumbnail").setValue(itemCode + ".jpg");
                 database.child("title").setValue(itemName);
                 // TODO: Intent에 extra 붙여서 결과 알려주기
                 Intent intent = new Intent(mContext, PaySuccessActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("itemName", itemName + "외 " + quantity + "개 상품");
+                intent.putExtra("itemPrice", itemPrice);
                 startActivity(intent);
                 finish();
             }

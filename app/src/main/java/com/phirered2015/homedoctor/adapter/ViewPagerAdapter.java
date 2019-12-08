@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
 public class ViewPagerAdapter extends PagerAdapter {
 
     private Context mContext;
@@ -59,7 +61,10 @@ public class ViewPagerAdapter extends PagerAdapter {
                 textView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        mContext.startActivity(new Intent(mContext, itemList.get(position).getActivity()));
+                        Intent intent = new Intent(mContext, itemList.get(position).getActivity());
+                        intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
+                        mContext.startActivity(intent);
+
                         activity.finish();
                     }
                 });

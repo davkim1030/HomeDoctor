@@ -7,7 +7,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:actionOverflowButtonStyle">@style/MyActionBtn</item>
-        <item name="android:fontFamily">@font/notosans_regular</item>
+        <item name="android:fontFamily">@font/notosanskr_regular</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
