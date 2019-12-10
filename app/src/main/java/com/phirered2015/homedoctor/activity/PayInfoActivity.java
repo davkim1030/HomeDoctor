@@ -62,7 +62,6 @@ public class PayInfoActivity extends AppCompatActivity {
         final Intent intent = getIntent();
         payInfo = intent.getStringArrayListExtra("nameList");
         quantityList = intent.getStringArrayListExtra("quantityList");
-        // TODO: 바로 구매하기 버튼 눌렀을 시, intent 받는 부분 필요
         itemCode = payInfo.get(0);
         list= findViewById(R.id.shopping_list);
         list.setAdapter(adapter);

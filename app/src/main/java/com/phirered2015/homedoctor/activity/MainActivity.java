@@ -146,7 +146,6 @@ public class MainActivity extends AppCompatActivity{
                 startActivity(delveryintent);
                 break;
             case R.id.menu_booking:
-                //TODO: 예약확인 엑티비티 연결
                 Intent reservationintent = new Intent(mContext, ReservationActivity.class);
                 startActivity(reservationintent);
                 break;

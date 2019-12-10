@@ -124,7 +124,6 @@ public class PayActivity extends AppCompatActivity {
                 database.child("amount").setValue(itemPrice);
                 database.child("thumbnail").setValue(itemCode + ".jpg");
                 database.child("title").setValue(itemName);
-                // TODO: Intent에 extra 붙여서 결과 알려주기
                 Intent intent = new Intent(mContext, PaySuccessActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
