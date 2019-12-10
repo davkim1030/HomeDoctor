@@ -58,7 +58,7 @@ public class BasketActivity extends AppCompatActivity {
         actionBar.setHomeButtonEnabled(true);
         UID = getSharedPreferences("firebase_uid_pref", MODE_PRIVATE).getString("UID", "");
 
-        checkAll = findViewById(R.id.checkbox_all);
+//        checkAll = findViewById(R.id.checkbox_all);
         btnDelete = findViewById(R.id.delete_all);
         btnPurchase = findViewById(R.id.order);
         txtTotalAmount = findViewById(R.id.txt_total_amount);
@@ -66,6 +66,12 @@ public class BasketActivity extends AppCompatActivity {
         listView = findViewById(R.id.shopping_list);
         progressBar = findViewById(R.id.progress_circular);
 
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
         // db에서 데이터 가져와서 list뷰에 넣는 부분
         mRef.child("user").child(UID).child("basket").addValueEventListener(new ValueEventListener() {
@@ -84,10 +90,13 @@ public class BasketActivity extends AppCompatActivity {
                     BasketAdapter adapter = new BasketAdapter(mContext, items);
                     listView.setAdapter(adapter);
                     progressBar.setVisibility(View.GONE);
+                    btnPurchase.setEnabled(true);
+                    btnDelete.setEnabled(true);
                 } else {
                     Toast.makeText(mContext, "장바구니가 비어있습니다.", Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.GONE);
                     btnPurchase.setEnabled(false);
+                    btnDelete.setEnabled(false);
                 }
             }
 
@@ -115,6 +124,15 @@ public class BasketActivity extends AppCompatActivity {
         });
 
 
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mRef.child("user").child(UID).child("basket").removeValue();
+                items.clear();
+                BasketAdapter adapter = new BasketAdapter(mContext, items);
+                listView.setAdapter(adapter);
+            }
+        });
 
 
 }

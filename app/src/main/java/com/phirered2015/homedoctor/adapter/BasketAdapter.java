@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -62,5 +63,6 @@ public class BasketAdapter extends BaseAdapter {
         quantity.setText(item.getState());   // 수량이지만 state를 사용
         return view;
     }
+
 
 }
