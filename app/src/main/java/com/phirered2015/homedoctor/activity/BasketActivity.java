@@ -87,7 +87,7 @@ public class BasketActivity extends AppCompatActivity {
                                 Integer.valueOf(i.child("price").getValue().toString())
                                 , storageReference)
                         );
-                        amountSum += Integer.valueOf(i.child("price").getValue().toString());
+                        amountSum += Integer.valueOf(i.child("price").getValue().toString()) * Integer.valueOf(i.child("quantity").getValue().toString());
                     }
                     BasketAdapter adapter = new BasketAdapter(mContext, items);
                     listView.setAdapter(adapter);
@@ -132,6 +132,7 @@ public class BasketActivity extends AppCompatActivity {
             public void onClick(View view) {
                 mRef.child("user").child(UID).child("basket").removeValue();
                 items.clear();
+                txtTotalAmount.setText("0");
                 BasketAdapter adapter = new BasketAdapter(mContext, items);
                 listView.setAdapter(adapter);
             }
