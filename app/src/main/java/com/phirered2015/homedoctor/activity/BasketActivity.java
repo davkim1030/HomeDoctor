@@ -61,7 +61,7 @@ public class BasketActivity extends AppCompatActivity {
 //        checkAll = findViewById(R.id.checkbox_all);
         btnDelete = findViewById(R.id.delete_all);
         btnPurchase = findViewById(R.id.order);
-        txtTotalAmount = findViewById(R.id.txt_total_amount);
+        txtTotalAmount = findViewById(R.id.total_price);
 
         listView = findViewById(R.id.shopping_list);
         progressBar = findViewById(R.id.progress_circular);
@@ -78,6 +78,7 @@ public class BasketActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.hasChildren()){
+                    int amountSum = 0;
                     items.clear();
                     for(DataSnapshot i: dataSnapshot.getChildren()){
                         StorageReference storageReference = FirebaseStorage.getInstance().getReference("thumbnail/" + i.getKey() + ".jpg");
@@ -86,12 +87,14 @@ public class BasketActivity extends AppCompatActivity {
                                 Integer.valueOf(i.child("price").getValue().toString())
                                 , storageReference)
                         );
+                        amountSum += Integer.valueOf(i.child("price").getValue().toString());
                     }
                     BasketAdapter adapter = new BasketAdapter(mContext, items);
                     listView.setAdapter(adapter);
                     progressBar.setVisibility(View.GONE);
                     btnPurchase.setEnabled(true);
                     btnDelete.setEnabled(true);
+                    txtTotalAmount.setText(String.valueOf(amountSum));
                 } else {
                     Toast.makeText(mContext, "장바구니가 비어있습니다.", Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.GONE);
