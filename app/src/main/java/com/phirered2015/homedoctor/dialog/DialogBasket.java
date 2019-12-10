@@ -30,13 +30,15 @@ public class DialogBasket {
     String UID;
     String itemcode;
     String pricestr;
+    String name;
     public DialogBasket(Context context){
         this.mContext = context;
     }
-    public DialogBasket(Context context, String item , String price){
+    public DialogBasket(Context context, String item , String price, String name){
         this.mContext = context;
         this.itemcode = item;
         this.pricestr = price;
+        this.name = name;
     }
 
     public void callFunc(){
@@ -100,6 +102,7 @@ public class DialogBasket {
                     Log.e("key", mRef.child("user").child(UID).child("basket").child(itemcode).getKey());
                     mRef.child("user").child(UID).child("basket").child(itemcode).child("quantity").setValue(String.valueOf(ctr[0]));
                     mRef.child("user").child(UID).child("basket").child(itemcode).child("price").setValue(pricestr);
+                    mRef.child("user").child(UID).child("basket").child(itemcode).child("name").setValue(name);
 //                    Intent intent = new Intent(mContext, BasketActivity.class);
 //                    mContext.startActivity(intent);
                     Toast.makeText(mContext, "추가되었습니다.", Toast.LENGTH_SHORT).show();

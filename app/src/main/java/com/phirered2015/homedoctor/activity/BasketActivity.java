@@ -44,6 +44,7 @@ public class BasketActivity extends AppCompatActivity {
     Button btnDelete, btnPurchase;
     TextView txtTotalAmount;
     ArrayList<DeliverStateItem> items = new ArrayList<>();
+    ArrayList<String> codeItems = new ArrayList<>();
     String UID;
     Context mContext;
     ProgressBar progressBar;
@@ -82,11 +83,12 @@ public class BasketActivity extends AppCompatActivity {
                     items.clear();
                     for(DataSnapshot i: dataSnapshot.getChildren()){
                         StorageReference storageReference = FirebaseStorage.getInstance().getReference("thumbnail/" + i.getKey() + ".jpg");
-                        items.add(new DeliverStateItem(i.getKey(),
+                        items.add(new DeliverStateItem(i.child("name").getValue().toString(),
                                 i.child("quantity").getValue().toString(),
                                 Integer.valueOf(i.child("price").getValue().toString())
                                 , storageReference)
                         );
+                        codeItems.add(i.getKey());
                         amountSum += Integer.valueOf(i.child("price").getValue().toString()) * Integer.valueOf(i.child("quantity").getValue().toString());
                     }
                     BasketAdapter adapter = new BasketAdapter(mContext, items);
@@ -117,7 +119,7 @@ public class BasketActivity extends AppCompatActivity {
                 ArrayList<String> arrayList = new ArrayList<>();
                 ArrayList<String> quantityList= new ArrayList<>();
                 for (DeliverStateItem i: items) {
-                    arrayList.add(i.getName());
+                    arrayList.addAll(codeItems);
                     quantityList.add(i.getState());
                 }
                 payIntent.putExtra("nameList", arrayList);

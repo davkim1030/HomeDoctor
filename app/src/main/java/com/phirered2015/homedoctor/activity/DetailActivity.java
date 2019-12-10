@@ -101,7 +101,7 @@ public class DetailActivity extends AppCompatActivity {
                 Intent intent = new Intent(mContext, BasketActivity.class);
                 Log.e("data", posstr);
                 Log.e("price", pricestr);
-                DialogBasket db = new DialogBasket(mContext, posstr, pricestr);
+                DialogBasket db = new DialogBasket(mContext, posstr, pricestr, productName.getText().toString());
                 db.callFunc();
             }
         });

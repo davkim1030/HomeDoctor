@@ -78,7 +78,7 @@ public class MainGridViewAdapter extends BaseAdapter {
 
         });
         ImageView gridImg = view.findViewById(R.id.img_gridview);
-        TextView name = view.findViewById(R.id.name_gridview);
+        final TextView name = view.findViewById(R.id.name_gridview);
         final TextView price = view.findViewById(R.id.price_gridview);
         ImageButton btn = view.findViewById(R.id.btn_gridview);
 
@@ -93,7 +93,7 @@ public class MainGridViewAdapter extends BaseAdapter {
             public void onClick(View view) {
                 Log.e("adapter price", priceset);
                 Log.e("adapter pos", posstr);
-                DialogBasket db = new DialogBasket(mContext, posstr, priceset);
+                DialogBasket db = new DialogBasket(mContext, posstr, priceset, name.getText().toString());
                 db.callFunc();
             }
         });
