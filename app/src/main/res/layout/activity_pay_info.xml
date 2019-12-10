@@ -80,13 +80,12 @@
                 android:textColor="@color/d_gray"
                 android:textSize="@dimen/txt_size_m"/>
 
-            <EditText
+            <TextView
                 android:id="@+id/edit_name"
                 android:layout_width="0dp"
                 android:layout_weight="7"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:imeOptions="actionNext"
                 android:textSize="@dimen/txt_size_m"/>
         </LinearLayout>
 
@@ -115,36 +114,30 @@
                 android:layout_height="wrap_content"
                 android:weightSum="3">
 
-                <EditText
+                <TextView
                     android:id="@+id/edit_phone_1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:maxLength="3"
                     android:layout_weight="1"
                     android:singleLine="true"
-                    android:inputType="numberDecimal"
-                    android:textSize="@dimen/txt_size_m"
-                    android:imeOptions="actionNext"/>
+                    android:textSize="@dimen/txt_size_m" />
 
-                <EditText
+                <TextView
                     android:id="@+id/edit_phone_2"
                     android:layout_weight="1"
                     android:layout_width="0dp"
-                    android:inputType="numberDecimal"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
                     android:maxLength="4"
-                    android:imeOptions="actionNext"
                     android:textSize="@dimen/txt_size_m"/>
-                <EditText
+                <TextView
                     android:id="@+id/edit_phone_3"
                     android:layout_weight="1"
                     android:layout_width="0dp"
-                    android:inputType="numberDecimal"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
                     android:maxLength="4"
-                    android:imeOptions="actionNext"
                     android:textSize="@dimen/txt_size_m"/>
 
             </LinearLayout>
@@ -188,22 +181,12 @@
                 android:gravity="end|center_vertical"
                 android:orientation="horizontal">
 
-                <EditText
+                <TextView
                     android:id="@+id/edit_post_num"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
-                    android:imeOptions="actionNext"
-                    android:editable="false"
                     android:textSize="@dimen/txt_size_m"/>
-
-                <Button
-                    android:id="@+id/btn_search_post"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/search_kr"
-                    android:background="@color/d_gray"
-                    android:textColor="@color/white"/>
 
             </LinearLayout>
 
@@ -225,14 +208,12 @@
                 android:textColor="@color/d_gray"
                 android:textSize="@dimen/txt_size_m"/>
 
-            <EditText
+            <TextView
                 android:id="@+id/edit_address"
                 android:layout_width="0dp"
                 android:layout_weight="7"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:editable="false"
-                android:imeOptions="actionNext"
                 android:textSize="@dimen/txt_size_m"/>
 
         </LinearLayout>
@@ -253,13 +234,12 @@
                 android:textColor="@color/d_gray"
                 android:textSize="@dimen/txt_size_m"/>
 
-            <EditText
+            <TextView
                 android:id="@+id/edit_detail_address"
                 android:layout_width="0dp"
                 android:layout_weight="7"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:imeOptions="actionNext"
                 android:textSize="@dimen/txt_size_m"/>
         </LinearLayout>
 

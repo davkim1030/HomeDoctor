@@ -43,8 +43,7 @@ public class PayInfoActivity extends AppCompatActivity {
     Context mContext;
     String UID, itemCode;
     int totalAmount = 0, totalCount = 0;
-    EditText editName, editPhone1, editPhone2, editPhone3, editPost, editAddress, editDetailAddress;
-    TextView txtTotalPrice;
+    TextView editName, editPhone1, editPhone2, editPhone3, editPost, editAddress, editDetailAddress, txtTotalPrice;
     Button btnPurchase;
     ArrayList<String> payInfo, quantityList;
     DatabaseReference mRef = FirebaseDatabase.getInstance().getReference();
