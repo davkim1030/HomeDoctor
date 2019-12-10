@@ -174,7 +174,7 @@ public class SignUpActivity extends AppCompatActivity {
            !editDetailAddress.getText().toString().isEmpty()){
             return editMail.getText().toString().contains("@") &&
                     editMail.getText().toString().contains(".") &&
-                    editPwd.getText().toString().length() < 6;
+                    editPwd.getText().toString().length() > 6;
         } else
             return false;
     }
