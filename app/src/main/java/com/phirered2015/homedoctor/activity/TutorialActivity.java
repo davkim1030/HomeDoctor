@@ -69,12 +69,12 @@ public class TutorialActivity extends AppCompatActivity {
     // 데이터 초기화
     private void initData() {
         tutorialItems = new ArrayList<>();
-        tutorialItems.add(new TutorialItem(getDrawable(R.drawable.ic_launcher_background), "1"));
-        tutorialItems.add(new TutorialItem(getDrawable(R.drawable.ic_launcher_background), "2"));
-        tutorialItems.add(new TutorialItem(getDrawable(R.drawable.ic_launcher_background), "3"));
-        tutorialItems.add(new TutorialItem(getDrawable(R.drawable.ic_launcher_background), "4"));
-        tutorialItems.add(new TutorialItem(getDrawable(R.drawable.ic_launcher_background), "5"));
-        tutorialItems.add(new TutorialItem(getDrawable(R.drawable.ic_launcher_background), "시작하기->", LoginActivity.class));
+        tutorialItems.add(new TutorialItem(getDrawable(R.drawable.ic_homedoctor), "살고있는 집의 불편함을 제거해주고 안정성을 높이기 위한 제품 소개 및 전문가와의 전화 및 방문 상담을 통한 제품 추천"));
+        tutorialItems.add(new TutorialItem(getDrawable(R.drawable.ic_tutorial_2), "침실, 주방, 복도, 욕실, 거실 등 다양한 환경 수정 제품을 만나보세요."));
+        tutorialItems.add(new TutorialItem(getDrawable(R.drawable.ic_tutorial_3), "로그아웃,  마이페이지, 장바구니, 배송확인, 예약확인 원하는 메뉴로 이동해 보세요."));
+        tutorialItems.add(new TutorialItem(getDrawable(R.drawable.ic_tutorial_4), "원하는 물품을 장바구니에 넣어 확인해  보세요."));
+        tutorialItems.add(new TutorialItem(getDrawable(R.drawable.ic_tutorial_5), "전화 상담을 통해 방문예약을 하실 수 있습니다"));
+        tutorialItems.add(new TutorialItem(getDrawable(R.color.transparent), "시작하기", LoginActivity.class));
     }
 
     // viewpager 초기화
