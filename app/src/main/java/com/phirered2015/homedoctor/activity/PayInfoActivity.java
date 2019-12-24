@@ -152,7 +152,8 @@ public class PayInfoActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if(vCnt < payInfo.size()){
-                        totalAmount += Integer.valueOf(dataSnapshot.child(payInfo.get(pos)).child("price").getValue().toString());
+                        totalAmount += Integer.valueOf(dataSnapshot.child(payInfo.get(pos)).child("price").getValue().toString())
+                                * Integer.valueOf(quantityList.get(pos));
                         vCnt++;
                     }
                     txtTotalPrice.setText("" + totalAmount);
